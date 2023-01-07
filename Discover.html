@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Music App</title>
+</head>
+
+<body>
+
+
+
+<header>
+    <div class="menu_side">
+        <h1>Playlist</h1>
+        <div class="playlist">
+            <h4 class="active"><span></span><i class="bi bi-music-note-beamed"></i> Playlist</h4>
+            <h4 ><span></span><i class="bi bi-music-note-beamed"></i> Last Listening</h4>
+            <h4 ><a href="Lyrics.html"><span></span><i class="bi bi-music-note-beamed"></i> LYRICS</a></h4>
+            
+        </div>
+        <div class="menu_song">
+            <li class="songItem">
+                
+            </li>
+            <li class="songItem">
+                
+            </li>
+            
+            
+            
+                
+        </div>
+    </div>
+
+
+    <div class="song_side">
+        <nav>
+            <ul>
+                <li><a href="/index.html">MY LIBRARY <span></span></a></li>
+                <li><a href="/Discover.html">DISCOVER</a></li>
+                
+            </ul>
+            <div class="search">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search Music...">
+            </div>
+            <div class="user">
+                <img src="bg.jpg" alt="User" title="InovationHub">
+            </div>
+        </nav>
+    </div>
+      <div class="master_play">
+        <div class="wave">
+            <div class="wave1"></div>
+            <div class="wave1"></div>
+            <div class="wave1"></div>
+        </div>
+        <img src="img/26th.jpg" alt="Alan" id="poster_master_play">
+        <h5 id="title">Vande Mataram<br>
+            <div class="subtitle">Bankim Chandra</div>
+        </h5>
+        <div class="icon">
+            <i class="bi bi-skip-start-fill" id="back"></i>
+            <i class="bi bi-play-fill" id="masterPlay"></i>
+            <i class="bi bi-skip-end-fill" id="next"></i>
+        </div>
+        <span id="currentStart">0:00</span>
+        <div class="bar">
+            <input type="range" id="seek" min="0" value="0" max="100">
+            <div class="bar2" id="bar2"></div>
+            <div class="dot"></div>
+        </div>
+        <span id="currentEnd">0:00</span>
+
+        <div class="vol">
+            <i class="bi bi-volume-down-fill" id="vol_icon"></i>
+            <input type="range" id="vol" min="0" value="30" max="100">
+            <div class="vol_bar"></div>
+            <div class="dot" id="vol_dot"></div>
+        </div>
+    </div>
+
+    <div class="nav_bar">
+        <i class="bi bi-house-fill"></i>
+        <i class="bi bi-bullseye"></i>
+        <i class="bi bi-search"></i>
+        <i class="bi bi-heart-fill"></i>
+    </div>
+</header>
+    <script src="script.js"></script>
+</body>
+
+</html>
