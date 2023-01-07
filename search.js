@@ -68,25 +68,49 @@ function showData(data){
 
 
 //event listener in get lyrics button
-result.addEventListener('click', e=>{
+result.addEventListener('click', async e =>{
     const clickedElement = e.target;
 
-    //checking clicked elemet is button or not
+    //checking clicked element is button or not
     if (clickedElement.tagName === 'SPAN'){
         const artist = clickedElement.getAttribute('data-artist');
         const songTitle = clickedElement.getAttribute('data-songtitle');
-        
-        getLyrics(artist, songTitle)
+
+        await displayLyrics(artist, songTitle)
     }
 })
 
-// Get lyrics for song
-async function getLyrics(artist, songTitle) {
-  
-    const res = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
+const lyricOptions = {
+    method: 'GET',
+    headers: {
+        'X-RapidAPI-Key': 'c3cfdc2e25mshd7877d0aa3b4a97p1d1d33jsnb3badacf6fb8',
+        'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
+    }
+};
 
-    const data = await res.json();
-    const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
+function parseHTML(htmlString) {
+    temp = document.createElement('div');
+    temp.innerHTML = htmlString;
+    return temp;
+}
+
+async function topSearchResultID(searchTerm) {
+    data = await (await fetch('https://genius-song-lyrics1.p.rapidapi.com/search/?q=' + searchTerm + '&per_page=1&page=1', lyricOptions)).json();
+    return data.hits[0].result.id;
+}
+
+async function fetchLyrics(songTitle, artist) {
+    id = await topSearchResultID(songTitle + ' - ' + artist);
+    data = await (await fetch('https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=' + id + '&text_format=html', lyricOptions)).json();
+    
+    html = parseHTML(data.lyrics.lyrics.body.html);
+    text_with_breaks = html.innerText.replace(/\r?\n/g, '<br/>');
+    return text_with_breaks;
+}
+
+// Get lyrics for song
+async function displayLyrics(artist, songTitle) {
+    const lyrics = await fetchLyrics(songTitle, artist);
     result.innerHTML = ` 
     <h4 style="margin-bottom:30px;"><strong>${artist}</strong> - ${songTitle}</h4><ul>
     <div data-artist="${artist}" data-songtitle="${songTitle}"> get lyrics</div>
