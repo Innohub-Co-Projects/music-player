@@ -1,5 +1,9 @@
 let iframe = document.querySelector('iframe');
 
+function frameNavigate(url) {
+    iframe.src = url;
+}
+
 var music = new Audio('./vande.mp3');
 
 let masterPlay = document.getElementById('masterPlay');

@@ -20,7 +20,7 @@
         <div class="playlist">
             <h4 class="active"><span></span><i class="bi bi-music-note-beamed"></i> Playlist</h4>
             <h4 ><span></span><i class="bi bi-music-note-beamed"></i> Last Listening</h4>
-            <h4 ><span></span><i class="bi bi-music-note-beamed"></i> Recommended</h4>
+            <h4 onclick="frameNavigate('./pages/lyrics/lyrics.html')"><span></span><i class="bi bi-music-note-beamed"></i> Lyrics Search</a></h4>
         </div>
         <div class="menu_song">
             <li class="songItem">
@@ -84,9 +84,8 @@
     <div class="song_side">
         <nav>
             <ul>
-                <li>Discover <span></span></li>
-                <li>MY LIBRARY</li>
-                <li>RADIO</li>
+                <li onclick="frameNavigate('./pages/my-library/my-library.html')">MY LIBRARY <span></span></li>
+                <li onclick="frameNavigate('./pages/discover/discover.html')">DISCOVER</li>
             </ul>
             <div class="search">
                 <i class="bi bi-search"></i>
