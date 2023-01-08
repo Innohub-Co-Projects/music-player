@@ -23,18 +23,6 @@ masterPlay.addEventListener('click',()=>{
     }
 } )
 
-const makeAllPlays = () =>{
-    Array.from(document.getElementsByClassName('playListPlay')).forEach((element)=>{
-            element.classList.add('bi-play-circle-fill');
-            element.classList.remove('bi-pause-circle-fill');
-    })
-}
-const makeAllBackgrounds = () =>{
-    Array.from(document.getElementsByClassName('songItem')).forEach((element)=>{
-            element.style.background = "rgb(105, 105, 170, 0)";
-    })
-}
-
 let currentStart = document.getElementById('currentStart');
 let currentEnd = document.getElementById('currentEnd');
 let seek = document.getElementById('seek');
@@ -106,6 +94,17 @@ vol.addEventListener('change', ()=>{
 })
 
 
+const makeAllPlays = () =>{
+    Array.from(document.getElementsByClassName('playListPlay')).forEach((element)=>{
+            element.classList.add('bi-play-circle-fill');
+            element.classList.remove('bi-pause-circle-fill');
+    })
+}
+const makeAllBackgrounds = () =>{
+    Array.from(document.getElementsByClassName('songItem')).forEach((element)=>{
+            element.style.background = "rgb(105, 105, 170, 0)";
+    })
+}
 
 let back = document.getElementById('back');
 let next = document.getElementById('next');
@@ -115,7 +114,7 @@ back.addEventListener('click', ()=>{
 
     index -= 1;
     if (index < 1) {
-        index = Array.from(document.getElementsByClassName('songItem')).length;
+        index = Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length;
     }
     music.src = `./pages/my-library/audio/${index}.mp3`;
     poster_master_play.src =`./pages/my-library/img/${index}.jpg`;
@@ -130,18 +129,18 @@ back.addEventListener('click', ()=>{
     })
     makeAllPlays()
 
-    document.getElementById(`${index}`).classList.remove('bi-play-fill');
-    document.getElementById(`${index}`).classList.add('bi-pause-fill');
+    iframe.contentDocument.getElementById(`${index}`).classList.remove('bi-play-fill');
+    iframe.contentDocument.getElementById(`${index}`).classList.add('bi-pause-fill');
     makeAllBackgrounds();
-    Array.from(document.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
-    
+    Array.from(iframe.contentDocument.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
 })
+
 next.addEventListener('click', ()=>{
     let songs = iframe.contentWindow['songs']
 
     index -= 0;
     index += 1;
-    if (index > Array.from(document.getElementsByClassName('songItem')).length) {
+    if (index > Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length) {
         index = 1;
         }
     music.src = `./pages/my-library/audio/${index}.mp3`;
@@ -157,9 +156,8 @@ next.addEventListener('click', ()=>{
     })
     makeAllPlays()
 
-    document.getElementById(`${index}`).classList.remove('bi-play-fill');
-    document.getElementById(`${index}`).classList.add('bi-pause-fill');
+    iframe.contentDocument.getElementById(`${index}`).classList.remove('bi-play-fill');
+    iframe.contentDocument.getElementById(`${index}`).classList.add('bi-pause-fill');
     makeAllBackgrounds();
-    Array.from(document.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
-    
+    Array.from(iframe.contentDocument.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
 })

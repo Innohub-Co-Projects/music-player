@@ -85,22 +85,22 @@ var songs = [
     },
 ]
 
-let all_songs = Array.from(parent.document.getElementsByClassName('songItem')).concat(Array.from(document.getElementsByClassName('songItem')))
-let all_play_buttons = Array.from(parent.document.getElementsByClassName('playListPlay')).concat(Array.from(document.getElementsByClassName('playListPlay')))
+let song_elements = Array.from(document.getElementsByClassName('songItem'))
+let play_button_elements = Array.from(document.getElementsByClassName('playListPlay'))
 
-Array.from(all_songs).forEach((element, i)=>{
-    element.getElementsByTagName('img')[0].src = i < 6 ? './pages/my-library/' + songs[i].poster : songs[i].poster;
+song_elements.forEach((element, i)=>{
+    element.getElementsByTagName('img')[0].src = songs[i].poster;
     element.getElementsByTagName('h5')[0].innerHTML = songs[i].songName;
 })
 
 const makeAllPlays = () =>{
-    all_play_buttons.forEach((element)=>{
+    play_button_elements.forEach((element)=>{
             element.classList.add('bi-play-circle-fill');
             element.classList.remove('bi-pause-circle-fill');
     })
 }
 const makeAllBackgrounds = () =>{
-    Array.from(all_songs).forEach((element)=>{
+    song_elements.forEach((element)=>{
             element.style.background = "rgb(105, 105, 170, 0)";
     })
 }
@@ -109,7 +109,7 @@ let index = 0;
 let poster_master_play = parent.document.getElementById('poster_master_play');
 let title = parent.document.getElementById('title');
 
-all_play_buttons.forEach((element)=>{
+play_button_elements.forEach((element)=>{
     element.addEventListener('click', (e)=>{
         index = e.target.id;
         parent.index = e.target.id;
@@ -136,7 +136,7 @@ all_play_buttons.forEach((element)=>{
             wave.classList.remove('active2');
         })
         makeAllBackgrounds();
-        Array.from(all_songs)[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
+        song_elements[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
     })
 })
 

@@ -227,6 +227,7 @@
    /* border: 1px solid #fff; */
    margin: auto;
    margin-top: 15px;
+   margin-bottom: 10%;
 }
 .main_container .popular_artists .h4{
   display: flex;
