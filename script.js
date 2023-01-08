@@ -1,8 +1,34 @@
+// Navigation functions:
+
 let iframe = document.querySelector('iframe');
 
 function frameNavigate(url) {
     iframe.src = url;
 }
+
+function navTo(destination) {
+    frameNavigate('./pages/' + destination + '/' + destination + '.html')
+}
+
+function setNavElementActive(nav_element) {
+    document.querySelectorAll('.menu_item').forEach(menu_item => {
+        menu_item.classList.remove('active')
+    })
+
+    nav_element.classList.add('active')
+}
+
+// set nav element as active and change title when click on a nav element
+document.querySelectorAll('.menu_item').forEach(menu_item => {
+    let title = document.querySelector('#section_title')
+
+    menu_item.addEventListener('click', (e) => {
+        setNavElementActive(e.target)
+        title.textContent = e.target.textContent
+    })
+})
+
+// Player functions:
 
 var music = new Audio('./vande.mp3');
 

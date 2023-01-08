@@ -16,21 +16,31 @@
 
 <header>
     <div class="menu_side">
-        <h1>Playlist</h1>
-        <div class="playlist">
-            <h4 class="active"><span></span><i class="bi bi-music-note-beamed"></i> Playlist</h4>
-            <h4 ><span></span><i class="bi bi-music-note-beamed"></i> Last Listening</h4>
-            <h4 onclick="frameNavigate('./pages/lyrics/lyrics.html')"><span></span><i class="bi bi-music-note-beamed"></i> Lyrics Search</a></h4>
-        </div>
+        <h1>Menu</h1>
+        <nav class="menu" >
+            <div class="menu_item active" onclick="navTo('discover')">
+                <i class="bi bi-compass-fill"></i>
+                Homepage
+            </div>
+            <div class="menu_item" onclick="navTo('my-library')">
+                <i class="bi bi-journal-album"></i>
+                My Library
+            </div>
+            <div class="menu_item" onclick="navTo('lyrics')">
+                <i class="bi bi-music-note-list"></i>
+                Lyric Search
+            </div>
+            <hr>
+            <h4 class="menu_item"><span></span><i class="bi bi-music-note-beamed"></i>Liked Songs</h4>
+            <h4 class="menu_item"><span></span><i class="bi bi-music-note-beamed"></i>Last Listening</h4>
+            <h4 class="menu_item"><span></span><i class="bi bi-music-note-beamed"></i>About</h4>
+        </nav>
     </div>
 
 
     <div class="song_side">
         <nav>
-            <ul>
-                <li onclick="frameNavigate('./pages/my-library/my-library.html')">MY LIBRARY <span></span></li>
-                <li onclick="frameNavigate('./pages/discover/discover.html')">DISCOVER</li>
-            </ul>
+            <h3 id="section_title">Homepage</h3>
             <div class="search">
                 <i class="bi bi-search"></i>
                 <input type="text" placeholder="Search Music...">

@@ -26,7 +26,7 @@ header {
 
 header .menu_side, .song_side {
     position: relative;
-    width: 25%;
+    width: 15%;
     height: 90%;
     background-color: #111727;
     box-shadow: 5px 0px 2px #090f1f;
@@ -34,7 +34,7 @@ header .menu_side, .song_side {
 }
 
 header .song_side {
-    width:75%;
+    width:85%;
     background: #0b1320;
 }
 
@@ -47,32 +47,54 @@ header .master_play {
 
 header .menu_side h1 {
     font-size: 20px;
-    margin: 15px 0px 0px 20px;
+    margin: 25px 0px 0px 25px;
     font-weight: 500;
 }
 
-header .menu_side .playlist {
+header .menu_side .menu {
     margin:  40px 0px 0px 20px;
 }
-
-header .menu_side .playlist h4 {
+header .menu_side .menu .menu_item {
+    font-size: 15px;
+    width: 90%;
+    height: 2.5em;
+    border: 0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+header .menu_side .menu .menu_item:hover {
+    background-color: #1b2135;
+}
+header .menu_side .menu .menu_item.active {
+    background-color: #1b2541;
+    color: #36e2ec;
+}
+header .menu_side .menu .menu_item i {
+    margin-left: 5% !important;
+    margin-right: 5% !important;
+}
+header .menu_side .menu h4 {
     font-size: 14px;
     font-weight: 400;
-    padding-bottom: 10px;
-    color: #4c5262;
+    color: #c6c8ce;
     cursor: pointer;
     display: flex;
     align-items: center;
     transition: .3s linear;
 }
-header .menu_side .playlist h4:hover {
+header .menu_side .menu h4:hover {
     color: #fff;
 }
-header .menu_side .playlist h4 span{
+header .menu_side .menu h4 span{
     position: relative;
-    margin-right: 35px;
+    margin-right: 22px;
+    margin-left: 11px;
 }
-header .menu_side .playlist h4 span::before{
+header .menu_side .menu h4 span::before{
     content: '';
     position: absolute;
     width: 4px;
@@ -82,21 +104,27 @@ header .menu_side .playlist h4 span::before{
     top: -4px;
     transition: .3s linear;
 }
-header .menu_side .playlist h4:hover span::before{
+header .menu_side .menu h4:hover span::before{
     border: 2px solid #fff;
 }
-header .menu_side .playlist h4 .bi{
+header .menu_side .menu h4 .bi{
     display: none;
 }
-header .menu_side .playlist .active{
+header .menu_side .menu .active{
     color: #36e2ec;
 }
-header .menu_side .playlist .active span{
+header .menu_side .menu .active span{
     display: none;
 }
-header .menu_side .playlist .active .bi{
+header .menu_side .menu .active .bi{
     display: flex;
     margin-right: 20px;
+}
+header .menu_side hr {
+    max-width: 85%;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    color: #555;
 }
 header .master_play {
     display: flex;
