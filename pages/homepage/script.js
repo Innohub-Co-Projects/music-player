@@ -87,7 +87,7 @@ function addTrendingAlbums(api_id, content_type, title, subtitle, img_src) {
     trendingList.appendChild(card)
 }
 
-import { fetchHomepage } from '/modules/api-requests.js'
+import { fetchHomepage } from '../../modules/api-requests.js'
 
 let homepageInfo = await fetchHomepage()
 
