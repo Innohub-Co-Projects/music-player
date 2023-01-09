@@ -1,3 +1,19 @@
+let sections = document.querySelectorAll('.section_container')
+
+// scroll button events
+sections.forEach(section => {
+    let left_button = section.querySelector('#left_scroll');
+    let right_button = section.querySelector('#right_scroll');
+    let list = section.querySelector('.list_container');
+
+    left_button.addEventListener('click', () =>{
+        list.scrollLeft -= 330;
+    })
+    right_button.addEventListener('click', () =>{
+        list.scrollLeft += 330;
+    })
+})
+
 // creates a new element with given parameters
 function newElement(type_str, attributes_obj, textContent = '') {
     let element = document.createElement(type_str);
@@ -19,8 +35,8 @@ function createCardInfoElement(title_text, subtitle_text) {
     return info
 }
 
-function createContentCard(title, subtitle, img_src) {
-    let card = newElement('li', { class: 'content_card' })
+function createContentCard(api_id, content_type, title, subtitle, img_src) {
+    let card = newElement('li', { class: 'content_card', 'data-api-id': api_id, 'data-type': content_type })
     let img = newElement('img', { src: img_src })
     let card_info = createCardInfoElement(title, subtitle)
 
@@ -29,18 +45,68 @@ function createContentCard(title, subtitle, img_src) {
     return card
 }
 
-let sections = document.querySelectorAll('.section_container')
+function listFromSection(section_type) {
+    let section = Array.from(sections).find(section => section.dataset.type == section_type)
+    let list = section.querySelector('.list_container')
 
-// scroll button events
-sections.forEach(section => {
-    let left_button = section.querySelector('#left_scroll');
-    let right_button = section.querySelector('#right_scroll');
-    let list = section.querySelector('.list_container');
+    return list
+}
 
-    left_button.addEventListener('click', () =>{
-        list.scrollLeft -= 330;
-    })
-    right_button.addEventListener('click', () =>{
-        list.scrollLeft += 330;
-    })
+function addAlbum(api_id, content_type, title, subtitle, img_src) {
+    let albumList = listFromSection('albums')
+    let card = createContentCard(api_id, content_type, title, subtitle, img_src)
+
+    albumList.appendChild(card)
+}
+
+function addPlaylist(api_id, content_type, title, subtitle, img_src) {
+    let playlistList = listFromSection('playlists')
+    let card = createContentCard(api_id, content_type, title, subtitle, img_src)
+
+    playlistList.appendChild(card)
+}
+
+function addChart(api_id, content_type, title, subtitle, img_src) {
+    let chartList = listFromSection('charts')
+    let card = createContentCard(api_id, content_type, title, subtitle, img_src)
+
+    chartList.appendChild(card)
+}
+
+function addTrendingSongs(api_id, content_type, title, subtitle, img_src) {
+    let trendingList = listFromSection('trending_songs')
+    let card = createContentCard(api_id, content_type, title, subtitle, img_src)
+
+    trendingList.appendChild(card)
+}
+
+function addTrendingAlbums(api_id, content_type, title, subtitle, img_src) {
+    let trendingList = listFromSection('trending_albums')
+    let card = createContentCard(api_id, content_type, title, subtitle, img_src)
+
+    trendingList.appendChild(card)
+}
+
+import { fetchHomepage } from '/modules/api-requests.js'
+
+let homepageInfo = await fetchHomepage()
+
+homepageInfo.albums.forEach(album => {
+    addAlbum(album.id, album.type, album.name, '', album.image[1].link)
+})
+
+homepageInfo.playlists.forEach(playlist => {
+    addPlaylist(playlist.id, playlist.type, playlist.title, playlist.subtitle, playlist.image[1].link)
+})
+
+homepageInfo.charts.forEach(chart => {
+    addChart(chart.id, chart.type, chart.title, '', chart.image[1].link)
+})
+
+homepageInfo.trending.songs.forEach(song => {
+    addTrendingSongs(song.id, song.type, song.name, '', song.image[1].link)
+})
+
+homepageInfo.trending.albums.forEach(albums => {
+    addTrendingAlbums(albums.id, albums.type, albums.name, '', albums.image[1].link)
 })
