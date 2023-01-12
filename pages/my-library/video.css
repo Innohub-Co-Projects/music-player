@@ -1,22 +1,35 @@
-.video-container:hov {
-    width: 600px; /* adjust as needed */
-    height: 300px; /* adjust as needed */
-    overflow: hidden;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0px 0px 10px #ccc; /* Add a subtle shadow */
-    margin: 0 auto; /* center the container on the page */
-}
+/* container header styles */
+.video-container .h4{
+    width: 100%;
+    padding-top: 1em;
+    padding-bottom: 0.6em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ }
+ .video-container .h4 .bi{
+    color: #a4a8b4;
+    cursor: pointer;
+    transition: .3s linear;
+ }
+ .video-container .h4 .bi:hover{
+    color: #fff;
+ }
+
 .video-container {
     display: flex; /* display the videos as a flex container */
     flex-wrap: wrap; /* allow videos to wrap to the next line if needed */
-    width: 100%; /* take up the full width of the parent container */
+    width: 90%;
+    margin: auto;
 }
 
-
 .video {
-    width: calc(25% - 10px); /* take up 25% of the container's width, with a 10px margin */
-    margin: 5px; /* add a 5px margin to each side of the video */
+    width: auto;
+    margin-left: 5px; /* add a 5px margin to each side of the video */
+    margin-right: 5px; /* add a 5px margin to each side of the video */
     flex-shrink: 0; /* prevent videos from shrinking below their width */
+    height: 100%;
+    object-fit: fill;
 }
 
 .video-scroll {
@@ -24,37 +37,15 @@
     flex-wrap: nowrap; /* prevent videos from wrapping to the next line */
     overflow-x: scroll; /* add horizontal scrolling */
     width: max-content; /* make the width of the container based on the size of the videos */
-
+    height: 13em;
 }
 .video-scroll::-webkit-scrollbar {
     width: 0em;
-   
-}
- 
-
-
-.video {
-  width: calc(25% - 10px); /* take up 25% of the container's width, with a 10px margin */
-  margin: 5px; /* add a 5px margin to each side of the video */
-  flex-shrink: 0; /* prevent videos from shrinking below their width */
 }
 
 #myVideo {
     width: 100%;
     border-radius: 10px; /* Rounded corners to match the container */
-}
-
-/* Add a gradient background */
-.video-container:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
-    border-radius: 10px;
-    z-index: -1; /* place behind the video */
 }
 
 /* Add a play button on the center of the video */
