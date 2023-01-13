@@ -2,144 +2,47 @@ let music = parent.music;
 let masterPlay = parent.document.getElementById('masterPlay');
 let wave = parent.document.getElementsByClassName('wave')[0];
 
+// ids are very important for a song object
+// they determine the img and audio src path for the song
+class Song {
+    constructor(id, title, subtitle) {
+        this.id = id;
+        this.title = title;
+        this.subtitle = subtitle;
+    }
+
+    getSrc() {
+        return `./pages/my-library/audio/${this.id}.mp3`
+    }
+
+    getPoster() {
+        return `./img/${this.id}.jpg`
+    }
+
+    play() {
+        let song_thumbnail = "./pages/my-library/" + this.getPoster()
+        parent.playAudio(this.getSrc(), this.title, this.subtitle, song_thumbnail)
+        current_song_id = this.id;
+    }
+}
+
 // create Array 
-
-function getSrc() {
-    return `./pages/my-library/audio/${this.id}.mp3`
-}
-
-function getPoster() {
-    return `./img/${this.id}.jpg`
-}
-
-function play() {
-    let song_thumbnail = "./pages/my-library/" + this.getPoster()
-    parent.playAudio(this.getSrc(), this.songName, this.subtitle, song_thumbnail)
-    index = this.id;
-}
-
 var songs = [
-    {
-        id:'1',
-        songName:"On My Way",
-        subtitle:"Alan Walker",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:'2',
-        songName:"Alan Walker-Fade",
-        subtitle:"Alan Walker",
-        getPoster,
-        getSrc,
-        play
-    },
-    // all object type 
-    {
-        id:"3",
-        songName: "Cartoon - On & On",
-        subtitle:"Daniel Levi",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"4",
-        songName: "Warriyo - Mortals",
-        subtitle:"Mortals",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"5",
-        songName: "Ertugrul Gazi",
-        subtitle:"Ertugrul",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"6",
-        songName: "Electronic Music",
-        subtitle:"Electro",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"7",
-        songName: "Agar Tum Sath Ho",
-        subtitle:"Tamashaa",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"8",
-        songName: "Suna Hai",
-        subtitle:"Neha Kakker",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"9",
-        songName: "Dilber",
-        subtitle:"Satyameva Jayate",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"10",
-        songName: "Duniya",
-        subtitle:"Luka Chuppi",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"11",
-        songName: "Lagdi Lahore Di",
-        subtitle:"Street Dancer 3D",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"12",
-        songName: "Putt Jatt Da",
-        subtitle:"Putt Jatt Da",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"13",
-        songName: "Baarishein",
-        subtitle:"Atif Aslam",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"14",
-        songName: "Vaaste",
-        subtitle:"Dhvani Bhanushali",
-        getPoster,
-        getSrc,
-        play
-    },
-    {
-        id:"15",
-        songName: "Lut Gaye",
-        subtitle:"Jubin Nautiyal",
-        getPoster,
-        getSrc,
-        play
-    },
+    new Song(1, "On My Way", "Alan Walker"),
+    new Song(2, "Fade", "Alan Walker"),
+    new Song(3, "Cartoon - On & On", "Daniel Levi"),
+    new Song(4, "Warriyo - Mortals", "Mortals"),
+    new Song(5, "Ertugrul Gazi", "Ertugrul"),
+    new Song(6, "Electronic Music", "Electro"),
+    new Song(7, "Agar Tum Sath Ho", "Tamashaa"),
+    new Song(8, "Suna Hai", "Neha Kakker"),
+    new Song(9, "Dilber", "Satyameva Jayate"),
+    new Song(10, "Duniya", "Luka Chuppi"),
+    new Song(11, "Lagdi Lahore Di", "Street Dancer 3D"),
+    new Song(12, "Putt Jatt Da", "Putt Jatt Da"),
+    new Song(13, "Baarishein", "Atif Aslam"),
+    new Song(14, "Vaaste", "Dhvani Bhanushali"),
+    new Song(15, "Lut Gaye", "Jubin Nautiyal")
 ]
 
 let song_elements = Array.from(document.getElementsByClassName('songItem'))
@@ -147,7 +50,7 @@ let play_button_elements = Array.from(document.getElementsByClassName('playListP
 
 song_elements.forEach((element, i)=>{
     element.getElementsByTagName('img')[0].src = songs[i].getPoster();
-    element.getElementsByTagName('h5')[0].innerHTML = songs[i].songName;
+    element.getElementsByTagName('h5')[0].innerHTML = songs[i].title;
 })
 
 const makeAllPlays = () =>{
@@ -177,23 +80,22 @@ function setSongElementActiveByID(song_id) {
     setSongElementActive(element)
 }
 
-var index = 0;
+var current_song_id = 0;
 
 function nextSong() {
-    let next_index = index >= songs.length ? 0 : index;
+    let next_index = current_song_id >= songs.length ? 0 : current_song_id;
     let song = songs[next_index]
     return song;
 }
 
 function previousSong() {
-    let prev_index = index - 2 < 0 ? songs.length - 1 : index - 2
+    let prev_index = current_song_id - 2 < 0 ? songs.length - 1 : current_song_id - 2
     let song = songs[prev_index]
     return song;
 }
 
 play_button_elements.forEach((element)=>{
     element.addEventListener('click', (e)=>{
-        index = e.target.id;
         let song_id = e.target.id;
 
         setSongElementActiveByID(song_id)
