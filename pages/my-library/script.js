@@ -12,20 +12,28 @@ function getPoster() {
     return `./img/${this.id}.jpg`
 }
 
+function play() {
+    let song_thumbnail = "./pages/my-library/" + this.getPoster()
+    parent.playAudio(this.getSrc(), this.songName, this.subtitle, song_thumbnail)
+    index = this.id;
+}
+
 var songs = [
     {
         id:'1',
         songName:"On My Way",
         subtitle:"Alan Walker",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:'2',
         songName:"Alan Walker-Fade",
         subtitle:"Alan Walker",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     // all object type 
     {
@@ -33,91 +41,104 @@ var songs = [
         songName: "Cartoon - On & On",
         subtitle:"Daniel Levi",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"4",
         songName: "Warriyo - Mortals",
         subtitle:"Mortals",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"5",
         songName: "Ertugrul Gazi",
         subtitle:"Ertugrul",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"6",
         songName: "Electronic Music",
         subtitle:"Electro",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"7",
         songName: "Agar Tum Sath Ho",
         subtitle:"Tamashaa",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"8",
         songName: "Suna Hai",
         subtitle:"Neha Kakker",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"9",
         songName: "Dilber",
         subtitle:"Satyameva Jayate",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"10",
         songName: "Duniya",
         subtitle:"Luka Chuppi",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"11",
         songName: "Lagdi Lahore Di",
         subtitle:"Street Dancer 3D",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"12",
         songName: "Putt Jatt Da",
         subtitle:"Putt Jatt Da",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"13",
         songName: "Baarishein",
         subtitle:"Atif Aslam",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"14",
         songName: "Vaaste",
         subtitle:"Dhvani Bhanushali",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
     {
         id:"15",
         songName: "Lut Gaye",
         subtitle:"Jubin Nautiyal",
         getPoster,
-        getSrc
+        getSrc,
+        play
     },
 ]
 
@@ -161,24 +182,12 @@ var index = 0;
 function nextSong() {
     let next_index = index >= songs.length ? 0 : index;
     let song = songs[next_index]
-    song.play = function() {
-        let song_thumbnail = "./pages/my-library/" + this.getPoster()
-        parent.playAudio(this.getSrc(), this.songName, this.subtitle, song_thumbnail)
-        index = this.id;
-    }
-
     return song;
 }
 
 function previousSong() {
     let prev_index = index - 2 < 0 ? songs.length - 1 : index - 2
     let song = songs[prev_index]
-    song.play = function() {
-        let song_thumbnail = "./pages/my-library/" + this.getPoster()
-        parent.playAudio(this.getSrc(), this.songName, this.subtitle, song_thumbnail)
-        index = this.id;
-    }
-
     return song;
 }
 
@@ -190,8 +199,7 @@ play_button_elements.forEach((element)=>{
         setSongElementActiveByID(song_id)
 
         let song = songs[song_id - 1]
-        let song_thumbnail = "./pages/my-library/" + song.getPoster()
-        parent.playAudio(song.getSrc(), song.songName, song.subtitle, song_thumbnail)
+        song.play()
     })
 })
 
