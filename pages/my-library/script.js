@@ -141,20 +141,32 @@ const makeAllBackgrounds = () =>{
     })
 }
 
+// active here just means that it has a pause icon instead of a play icon
+function setSongElementActive(song_element) {
+    makeAllPlays();
+    let icon = song_element.querySelector('i')
+    icon.classList.remove('bi-play-circle-fill');
+    icon.classList.add('bi-pause-circle-fill');
+    makeAllBackgrounds();
+    song_element.style.background = "rgb(105, 105, 170, .1)";
+}
+
+function setSongElementActiveByID(song_id) {
+    let element = song_elements[song_id - 1]
+    setSongElementActive(element)
+}
+
 let index = 0;
 parent.index = 0;
 
 play_button_elements.forEach((element)=>{
     element.addEventListener('click', (e)=>{
-        index = e.target.id;
+        song_id = e.target.id;
         parent.index = e.target.id;
-        makeAllPlays();
-        e.target.classList.remove('bi-play-circle-fill');
-        e.target.classList.add('bi-pause-circle-fill');
-        makeAllBackgrounds();
-        song_elements[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
 
-        let song = songs[index - 1]
+        setSongElementActiveByID(song_id)
+
+        let song = songs[song_id - 1]
         let song_thumbnail = "./pages/my-library/" + song.getPoster()
         parent.playAudio(song.getSrc(), song.songName, song.subtitle, song_thumbnail)
     })

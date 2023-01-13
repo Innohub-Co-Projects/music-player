@@ -146,39 +146,27 @@ let back = document.getElementById('back');
 let next = document.getElementById('next');
 
 back.addEventListener('click', ()=>{
-    let songs = iframe.contentWindow.songs
-
-    index -= 1;
-    if (index < 1) {
-        index = Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length;
+    song_id -= 1;
+    if (song_id < 1) {
+        song_id = Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length;
     }
 
-    makeAllPlays()
-    iframe.contentDocument.getElementById(`${index}`).classList.remove('bi-play-fill');
-    iframe.contentDocument.getElementById(`${index}`).classList.add('bi-pause-fill');
-    makeAllBackgrounds();
-    Array.from(iframe.contentDocument.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
+    iframe.contentWindow.setSongElementActiveByID(song_id)
 
-    let song = songs[index - 1]
+    let song = songs[song_id - 1]
     let song_thumbnail = "./pages/my-library/" + song.getPoster()
     parent.playAudio(song.getSrc(), song.songName, song.subtitle, song_thumbnail)
 })
 
 next.addEventListener('click', ()=>{
-    let songs = iframe.contentWindow['songs']
-
-    index += 1;
-    if (index > Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length) {
-        index = 1;
+    song_id += 1;
+    if (song_id > Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length) {
+        song_id = 1;
     }
 
-    makeAllPlays()
-    iframe.contentDocument.getElementById(`${index}`).classList.remove('bi-play-fill');
-    iframe.contentDocument.getElementById(`${index}`).classList.add('bi-pause-fill');
-    makeAllBackgrounds();
-    Array.from(iframe.contentDocument.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
+    iframe.contentWindow.setSongElementActiveByID(song_id)
 
-    let song = songs[index - 1]
+    let song = songs[song_id - 1]
     let song_thumbnail = "./pages/my-library/" + song.getPoster()
     parent.playAudio(song.getSrc(), song.songName, song.subtitle, song_thumbnail)
 })
