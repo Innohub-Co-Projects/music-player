@@ -35,17 +35,23 @@ var music = new Audio('./vande.mp3');
 let masterPlay = document.getElementById('masterPlay');
 let wave = document.getElementsByClassName('wave')[0];
 
+// change icon on play/pause
+music.addEventListener('pause', () => {
+    masterPlay.classList.add('bi-play-fill');
+    masterPlay.classList.remove('bi-pause-fill');
+    wave.classList.remove('active2');
+})
+music.addEventListener('play', () => {
+    masterPlay.classList.remove('bi-play-fill');
+    masterPlay.classList.add('bi-pause-fill');
+    wave.classList.add('active2');
+})
+
 masterPlay.addEventListener('click',()=>{
     if (music.paused || music.currentTime <=0) {
         music.play();
-        masterPlay.classList.remove('bi-play-fill');
-        masterPlay.classList.add('bi-pause-fill');
-        wave.classList.add('active2');
     } else {
         music.pause();
-        masterPlay.classList.add('bi-play-fill');
-        masterPlay.classList.remove('bi-pause-fill');
-        wave.classList.remove('active2');
     }
 } )
 
@@ -83,13 +89,6 @@ music.addEventListener('timeupdate',()=>{
 seek.addEventListener('change', ()=>{
     music.currentTime = seek.value * music.duration/100;
 })
-
-music.addEventListener('ended', ()=>{
-    masterPlay.classList.add('bi-play-fill');
-    masterPlay.classList.remove('bi-pause-fill');
-    wave.classList.remove('active2');
-})
-
 
 let vol_icon = document.getElementById('vol_icon');
 let vol = document.getElementById('vol');

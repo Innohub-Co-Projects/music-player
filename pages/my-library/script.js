@@ -127,8 +127,6 @@ play_button_elements.forEach((element)=>{
             let {songName} = ele;
             title.innerHTML = songName;
         })
-        masterPlay.classList.remove('bi-play-fill');
-        masterPlay.classList.add('bi-pause-fill');
         wave.classList.add('active2');
         music.addEventListener('ended',()=>{
             masterPlay.classList.add('bi-play-fill');
