@@ -35,6 +35,17 @@ var music = new Audio('./vande.mp3');
 let masterPlay = document.getElementById('masterPlay');
 let wave = document.getElementsByClassName('wave')[0];
 
+function playAudio(audio_src, audio_title, audio_subtitle, thumbnail_img) {
+    music.src = audio_src;
+    music.play();
+
+    let title_element = document.getElementById('title');
+    title_element.innerHTML = `${audio_title} <br> <div class="subtitle">${audio_subtitle}</div>`;
+
+    let thumbnail = document.getElementById('poster_master_play');
+    thumbnail.src = thumbnail_img;
+}
+
 // change icon on play/pause
 music.addEventListener('pause', () => {
     masterPlay.classList.add('bi-play-fill');
@@ -141,48 +152,33 @@ back.addEventListener('click', ()=>{
     if (index < 1) {
         index = Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length;
     }
-    music.src = `./pages/my-library/audio/${index}.mp3`;
-    poster_master_play.src =`./pages/my-library/img/${index}.jpg`;
-    music.play();
-    let song_title = songs.filter((ele)=>{
-        return ele.id == index;
-    })
 
-    song_title.forEach(ele =>{
-        let {songName} = ele;
-        title.innerHTML = songName;
-    })
     makeAllPlays()
-
     iframe.contentDocument.getElementById(`${index}`).classList.remove('bi-play-fill');
     iframe.contentDocument.getElementById(`${index}`).classList.add('bi-pause-fill');
     makeAllBackgrounds();
     Array.from(iframe.contentDocument.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
+
+    let song = songs[index - 1]
+    let song_thumbnail = "./pages/my-library/" + song.getPoster()
+    parent.playAudio(song.getSrc(), song.songName, song.subtitle, song_thumbnail)
 })
 
 next.addEventListener('click', ()=>{
     let songs = iframe.contentWindow['songs']
 
-    index -= 0;
     index += 1;
     if (index > Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length) {
         index = 1;
-        }
-    music.src = `./pages/my-library/audio/${index}.mp3`;
-    poster_master_play.src =`./pages/my-library/img/${index}.jpg`;
-    music.play();
-    let song_title = songs.filter((ele)=>{
-        return ele.id == index;
-    })
+    }
 
-    song_title.forEach(ele =>{
-        let {songName} = ele;
-        title.innerHTML = songName;
-    })
     makeAllPlays()
-
     iframe.contentDocument.getElementById(`${index}`).classList.remove('bi-play-fill');
     iframe.contentDocument.getElementById(`${index}`).classList.add('bi-pause-fill');
     makeAllBackgrounds();
     Array.from(iframe.contentDocument.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
+
+    let song = songs[index - 1]
+    let song_thumbnail = "./pages/my-library/" + song.getPoster()
+    parent.playAudio(song.getSrc(), song.songName, song.subtitle, song_thumbnail)
 })

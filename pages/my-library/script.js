@@ -4,84 +4,120 @@ let wave = parent.document.getElementsByClassName('wave')[0];
 
 // create Array 
 
+function getSrc() {
+    return `./pages/my-library/audio/${this.id}.mp3`
+}
+
+function getPoster() {
+    return `./img/${this.id}.jpg`
+}
+
 var songs = [
     {
         id:'1',
-        songName:` On My Way <br>
-        <div class="subtitle">Alan Walker</div>`,
-        poster: "./img/1.jpg"
+        songName:"On My Way",
+        subtitle:"Alan Walker",
+        getPoster,
+        getSrc
     },
     {
         id:'2',
-        songName:` Alan Walker-Fade <br>
-        <div class="subtitle">Alan Walker</div>`,
-        poster: "./img/2.jpg"
+        songName:"Alan Walker-Fade",
+        subtitle:"Alan Walker",
+        getPoster,
+        getSrc
     },
     // all object type 
     {
         id:"3",
-        songName: `Cartoon - On & On <br><div class="subtitle"> Daniel Levi</div>`,
-        poster: "./img/3.jpg",
+        songName: "Cartoon - On & On",
+        subtitle:"Daniel Levi",
+        getPoster,
+        getSrc
     },
     {
         id:"4",
-        songName: `Warriyo - Mortals <br><div class="subtitle">Mortals</div>`,
-        poster: "./img/4.jpg",
+        songName: "Warriyo - Mortals",
+        subtitle:"Mortals",
+        getPoster,
+        getSrc
     },
     {
         id:"5",
-        songName: `Ertugrul Gazi <br><div class="subtitle">Ertugrul</div>`,
-        poster: "./img/5.jpg",
+        songName: "Ertugrul Gazi",
+        subtitle:"Ertugrul",
+        getPoster,
+        getSrc
     },
     {
         id:"6",
-        songName: `Electronic Music <br><div class="subtitle">Electro</div>`,
-        poster: "./img/6.jpg",
+        songName: "Electronic Music",
+        subtitle:"Electro",
+        getPoster,
+        getSrc
     },
     {
         id:"7",
-        songName: `Agar Tum Sath Ho <br><div class="subtitle">Tamashaa</div>`,
-        poster: "./img/7.jpg",
+        songName: "Agar Tum Sath Ho",
+        subtitle:"Tamashaa",
+        getPoster,
+        getSrc
     },
     {
         id:"8",
-        songName: `Suna Hai <br><div class="subtitle">Neha Kakker</div>`,
-        poster: "./img/8.jpg",
+        songName: "Suna Hai",
+        subtitle:"Neha Kakker",
+        getPoster,
+        getSrc
     },
     {
         id:"9",
-        songName: `Dilber <br><div class="subtitle">Satyameva Jayate</div>`,
-        poster: "./img/9.jpg",
+        songName: "Dilber",
+        subtitle:"Satyameva Jayate",
+        getPoster,
+        getSrc
     },
     {
         id:"10",
-        songName: `Duniya <br><div class="subtitle">Luka Chuppi</div>`,
-        poster: "./img/10.jpg",
+        songName: "Duniya",
+        subtitle:"Luka Chuppi",
+        getPoster,
+        getSrc
     },
     {
         id:"11",
-        songName: `Lagdi Lahore Di <br><div class="subtitle">Street Dancer 3D</div>`,
-        poster: "./img/11.jpg",
+        songName: "Lagdi Lahore Di",
+        subtitle:"Street Dancer 3D",
+        getPoster,
+        getSrc
     },
     {
         id:"12",
-        songName: `Putt Jatt Da <br><div class="subtitle">Putt Jatt Da</div>`,
-        poster: "./img/12.jpg",
+        songName: "Putt Jatt Da",
+        subtitle:"Putt Jatt Da",
+        getPoster,
+        getSrc
     },
     {
         id:"13",
-        songName: `Baarishein <br><div class="subtitle">Atif Aslam</div>`,
-        poster: "./img/13.jpg",
+        songName: "Baarishein",
+        subtitle:"Atif Aslam",
+        getPoster,
+        getSrc
     },
     {
         id:"14",
-        songName: `Vaaste <br><div class="subtitle">Dhvani Bhanushali</div>`,
-        poster: "./img/14.jpg",
+        songName: "Vaaste",
+        subtitle:"Dhvani Bhanushali",
+        getPoster,
+        getSrc
     },
     {
         id:"15",
-        songName: `Lut Gaye <br><div class="subtitle">Jubin Nautiyal</div>`,
-        poster: "./img/15.jpg",
+        songName: "Lut Gaye",
+        subtitle:"Jubin Nautiyal",
+        getPoster,
+        getSrc
     },
 ]
 
@@ -89,7 +125,7 @@ let song_elements = Array.from(document.getElementsByClassName('songItem'))
 let play_button_elements = Array.from(document.getElementsByClassName('playListPlay'))
 
 song_elements.forEach((element, i)=>{
-    element.getElementsByTagName('img')[0].src = songs[i].poster;
+    element.getElementsByTagName('img')[0].src = songs[i].getPoster();
     element.getElementsByTagName('h5')[0].innerHTML = songs[i].songName;
 })
 
@@ -106,8 +142,7 @@ const makeAllBackgrounds = () =>{
 }
 
 let index = 0;
-let poster_master_play = parent.document.getElementById('poster_master_play');
-let title = parent.document.getElementById('title');
+parent.index = 0;
 
 play_button_elements.forEach((element)=>{
     element.addEventListener('click', (e)=>{
@@ -116,25 +151,12 @@ play_button_elements.forEach((element)=>{
         makeAllPlays();
         e.target.classList.remove('bi-play-circle-fill');
         e.target.classList.add('bi-pause-circle-fill');
-        music.src = `./pages/my-library/audio/${index}.mp3`;
-        poster_master_play.src =`./pages/my-library/img/${index}.jpg`;
-        music.play();
-        let song_title = songs.filter((ele)=>{
-            return ele.id == index;
-        })
-
-        song_title.forEach(ele =>{
-            let {songName} = ele;
-            title.innerHTML = songName;
-        })
-        wave.classList.add('active2');
-        music.addEventListener('ended',()=>{
-            masterPlay.classList.add('bi-play-fill');
-            masterPlay.classList.remove('bi-pause-fill');
-            wave.classList.remove('active2');
-        })
         makeAllBackgrounds();
         song_elements[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
+
+        let song = songs[index - 1]
+        let song_thumbnail = "./pages/my-library/" + song.getPoster()
+        parent.playAudio(song.getSrc(), song.songName, song.subtitle, song_thumbnail)
     })
 })
 
