@@ -31,21 +31,37 @@ document.querySelectorAll('.menu_item').forEach(menu_item => {
 // Player functions:
 
 var music = new Audio('./vande.mp3');
-
 let masterPlay = document.getElementById('masterPlay');
 let wave = document.getElementsByClassName('wave')[0];
+
+function playAudio(audio_src, audio_title, audio_subtitle, thumbnail_img) {
+    music.src = audio_src;
+    music.play();
+
+    let title_element = document.getElementById('title');
+    title_element.innerHTML = `${audio_title} <br> <div class="subtitle">${audio_subtitle}</div>`;
+
+    let thumbnail = document.getElementById('poster_master_play');
+    thumbnail.src = thumbnail_img;
+}
+
+// change icon on play/pause
+music.addEventListener('pause', () => {
+    masterPlay.classList.add('bi-play-fill');
+    masterPlay.classList.remove('bi-pause-fill');
+    wave.classList.remove('active2');
+})
+music.addEventListener('play', () => {
+    masterPlay.classList.remove('bi-play-fill');
+    masterPlay.classList.add('bi-pause-fill');
+    wave.classList.add('active2');
+})
 
 masterPlay.addEventListener('click',()=>{
     if (music.paused || music.currentTime <=0) {
         music.play();
-        masterPlay.classList.remove('bi-play-fill');
-        masterPlay.classList.add('bi-pause-fill');
-        wave.classList.add('active2');
     } else {
         music.pause();
-        masterPlay.classList.add('bi-play-fill');
-        masterPlay.classList.remove('bi-pause-fill');
-        wave.classList.remove('active2');
     }
 } )
 
@@ -84,13 +100,6 @@ seek.addEventListener('change', ()=>{
     music.currentTime = seek.value * music.duration/100;
 })
 
-music.addEventListener('ended', ()=>{
-    masterPlay.classList.add('bi-play-fill');
-    masterPlay.classList.remove('bi-pause-fill');
-    wave.classList.remove('active2');
-})
-
-
 let vol_icon = document.getElementById('vol_icon');
 let vol = document.getElementById('vol');
 let vol_dot = document.getElementById('vol_dot');
@@ -119,71 +128,17 @@ vol.addEventListener('change', ()=>{
     music.volume = vol_a/100;
 })
 
-
-const makeAllPlays = () =>{
-    Array.from(document.getElementsByClassName('playListPlay')).forEach((element)=>{
-            element.classList.add('bi-play-circle-fill');
-            element.classList.remove('bi-pause-circle-fill');
-    })
-}
-const makeAllBackgrounds = () =>{
-    Array.from(document.getElementsByClassName('songItem')).forEach((element)=>{
-            element.style.background = "rgb(105, 105, 170, 0)";
-    })
-}
-
 let back = document.getElementById('back');
 let next = document.getElementById('next');
 
 back.addEventListener('click', ()=>{
-    let songs = iframe.contentWindow.songs
+    let iframe_functions = iframe.contentWindow
 
-    index -= 1;
-    if (index < 1) {
-        index = Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length;
-    }
-    music.src = `./pages/my-library/audio/${index}.mp3`;
-    poster_master_play.src =`./pages/my-library/img/${index}.jpg`;
-    music.play();
-    let song_title = songs.filter((ele)=>{
-        return ele.id == index;
-    })
-
-    song_title.forEach(ele =>{
-        let {songName} = ele;
-        title.innerHTML = songName;
-    })
-    makeAllPlays()
-
-    iframe.contentDocument.getElementById(`${index}`).classList.remove('bi-play-fill');
-    iframe.contentDocument.getElementById(`${index}`).classList.add('bi-pause-fill');
-    makeAllBackgrounds();
-    Array.from(iframe.contentDocument.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
+    iframe_functions.previousSong().play()
 })
 
 next.addEventListener('click', ()=>{
-    let songs = iframe.contentWindow['songs']
+    let iframe_functions = iframe.contentWindow
 
-    index -= 0;
-    index += 1;
-    if (index > Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length) {
-        index = 1;
-        }
-    music.src = `./pages/my-library/audio/${index}.mp3`;
-    poster_master_play.src =`./pages/my-library/img/${index}.jpg`;
-    music.play();
-    let song_title = songs.filter((ele)=>{
-        return ele.id == index;
-    })
-
-    song_title.forEach(ele =>{
-        let {songName} = ele;
-        title.innerHTML = songName;
-    })
-    makeAllPlays()
-
-    iframe.contentDocument.getElementById(`${index}`).classList.remove('bi-play-fill');
-    iframe.contentDocument.getElementById(`${index}`).classList.add('bi-pause-fill');
-    makeAllBackgrounds();
-    Array.from(iframe.contentDocument.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
+    iframe_functions.nextSong().play()
 })
