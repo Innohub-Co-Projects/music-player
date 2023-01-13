@@ -1,7 +1,3 @@
-let music = parent.music;
-let masterPlay = parent.document.getElementById('masterPlay');
-let wave = parent.document.getElementsByClassName('wave')[0];
-
 // ids are very important for a song object
 // they determine the img and audio src path for the song
 class Song {
@@ -115,7 +111,6 @@ left_scroll.addEventListener('click', ()=>{
 right_scroll.addEventListener('click', ()=>{
     pop_song.scrollLeft += 330;
 })
-
 
 let left_scrolls = document.getElementById('left_scrolls');
 let right_scrolls = document.getElementById('right_scrolls');

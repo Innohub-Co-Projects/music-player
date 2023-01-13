@@ -31,7 +31,6 @@ document.querySelectorAll('.menu_item').forEach(menu_item => {
 // Player functions:
 
 var music = new Audio('./vande.mp3');
-
 let masterPlay = document.getElementById('masterPlay');
 let wave = document.getElementsByClassName('wave')[0];
 
@@ -128,19 +127,6 @@ vol.addEventListener('change', ()=>{
     vol_dot.style.left = `${vol_a}%`;
     music.volume = vol_a/100;
 })
-
-
-const makeAllPlays = () =>{
-    Array.from(document.getElementsByClassName('playListPlay')).forEach((element)=>{
-            element.classList.add('bi-play-circle-fill');
-            element.classList.remove('bi-pause-circle-fill');
-    })
-}
-const makeAllBackgrounds = () =>{
-    Array.from(document.getElementsByClassName('songItem')).forEach((element)=>{
-            element.style.background = "rgb(105, 105, 170, 0)";
-    })
-}
 
 let back = document.getElementById('back');
 let next = document.getElementById('next');
