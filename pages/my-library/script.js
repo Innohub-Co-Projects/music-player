@@ -156,13 +156,36 @@ function setSongElementActiveByID(song_id) {
     setSongElementActive(element)
 }
 
-let index = 0;
-parent.index = 0;
+var index = 0;
+
+function nextSong() {
+    let next_index = index >= songs.length ? 0 : index;
+    let song = songs[next_index]
+    song.play = function() {
+        let song_thumbnail = "./pages/my-library/" + this.getPoster()
+        parent.playAudio(this.getSrc(), this.songName, this.subtitle, song_thumbnail)
+        index = this.id;
+    }
+
+    return song;
+}
+
+function previousSong() {
+    let prev_index = index - 2 < 0 ? songs.length - 1 : index - 2
+    let song = songs[prev_index]
+    song.play = function() {
+        let song_thumbnail = "./pages/my-library/" + this.getPoster()
+        parent.playAudio(this.getSrc(), this.songName, this.subtitle, song_thumbnail)
+        index = this.id;
+    }
+
+    return song;
+}
 
 play_button_elements.forEach((element)=>{
     element.addEventListener('click', (e)=>{
-        song_id = e.target.id;
-        parent.index = e.target.id;
+        index = e.target.id;
+        let song_id = e.target.id;
 
         setSongElementActiveByID(song_id)
 

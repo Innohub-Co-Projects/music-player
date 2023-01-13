@@ -146,27 +146,13 @@ let back = document.getElementById('back');
 let next = document.getElementById('next');
 
 back.addEventListener('click', ()=>{
-    song_id -= 1;
-    if (song_id < 1) {
-        song_id = Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length;
-    }
+    let iframe_functions = iframe.contentWindow
 
-    iframe.contentWindow.setSongElementActiveByID(song_id)
-
-    let song = songs[song_id - 1]
-    let song_thumbnail = "./pages/my-library/" + song.getPoster()
-    parent.playAudio(song.getSrc(), song.songName, song.subtitle, song_thumbnail)
+    iframe_functions.previousSong().play()
 })
 
 next.addEventListener('click', ()=>{
-    song_id += 1;
-    if (song_id > Array.from(iframe.contentDocument.getElementsByClassName('songItem')).length) {
-        song_id = 1;
-    }
+    let iframe_functions = iframe.contentWindow
 
-    iframe.contentWindow.setSongElementActiveByID(song_id)
-
-    let song = songs[song_id - 1]
-    let song_thumbnail = "./pages/my-library/" + song.getPoster()
-    parent.playAudio(song.getSrc(), song.songName, song.subtitle, song_thumbnail)
+    iframe_functions.nextSong().play()
 })
