@@ -46,7 +46,8 @@ let play_button_elements = Array.from(document.getElementsByClassName('playListP
 
 song_elements.forEach((element, i)=>{
     element.getElementsByTagName('img')[0].src = songs[i].getPoster();
-    element.getElementsByTagName('h5')[0].innerHTML = songs[i].title;
+    let title_text = `${songs[i].title} <br> <div class="subtitle">${songs[i].subtitle}</div>`
+    element.getElementsByTagName('h5')[0].innerHTML = title_text;
 })
 
 const makeAllPlays = () =>{
