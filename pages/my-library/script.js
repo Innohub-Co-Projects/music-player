@@ -102,24 +102,20 @@ play_button_elements.forEach((element)=>{
     })
 })
 
-let left_scroll = document.getElementById('left_scroll');
-let right_scroll = document.getElementById('right_scroll');
-let pop_song = document.getElementsByClassName('pop_song')[0];
+// adds event listeners for all scroll buttons on the library page
+// assumes that the scrollable list is the second element of the parent container
+let button_containers = document.querySelectorAll('.btn_s')
+button_containers.forEach(button_container => {
+    let section_container = button_container.parentElement.parentElement
+    let list = section_container.children[1]
 
-left_scroll.addEventListener('click', ()=>{
-    pop_song.scrollLeft -= 330;
-})
-right_scroll.addEventListener('click', ()=>{
-    pop_song.scrollLeft += 330;
-})
+    let left_button = button_container.querySelector('#left_scroll')
+    let right_button = button_container.querySelector('#right_scroll')
 
-let left_scrolls = document.getElementById('left_scrolls');
-let right_scrolls = document.getElementById('right_scrolls');
-let item = document.getElementsByClassName('item')[0];
-
-left_scrolls.addEventListener('click', ()=>{
-    item.scrollLeft -= 330;
-})
-right_scrolls.addEventListener('click', ()=>{
-    item.scrollLeft += 330;
+    left_button.addEventListener('click', ()=>{
+        list.scrollLeft -= 330;
+    })
+    right_button.addEventListener('click', ()=>{
+        list.scrollLeft += 330;
+    })
 })
