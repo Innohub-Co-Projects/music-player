@@ -81,6 +81,15 @@ body {
     gap: 1em;
 }
 
+.list header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.2fr;
+    padding-left: 6em;
+    padding-right: 6.8em;
+    padding-bottom: 5px;
+    border-bottom: 2px #424050 solid;
+}
+
 .list_item {
     color: #7B818A;
     font-size: 0.8em;
@@ -102,8 +111,8 @@ body {
 
 .list_item .info {
     flex: 1;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.2fr;
     align-items: center;
     margin-left: 3em;
     margin-right: 4em;
