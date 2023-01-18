@@ -42,6 +42,12 @@ function createListItem(api_id, img_src, audio_title, audio_artist, audio_album,
     return list_item
 }
 
+function addNewItemToList(api_id, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration) {
+    let li = createListItem(api_id, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration);
+    let list = document.querySelector('.list');
+    list.appendChild(li);
+}
+
 function updateInfoPanel(img_src, title, subtitle) {
     let info_panel = document.querySelector('.info_panel')
 
@@ -53,4 +59,16 @@ function updateInfoPanel(img_src, title, subtitle) {
 
     let subtitle_element = info_panel.querySelector('.subtitle');
     subtitle_element.textContent = subtitle;
+}
+
+import { fetchPlaylistDetails } from '../../modules/api-requests.js'
+
+async function generateFromPlaylistID(playlist_api_id) {
+    let playlist_data = await fetchPlaylistDetails(playlist_api_id);
+
+    updateInfoPanel(playlist_data.image[2].link, playlist_data.name, `${playlist_data.songCount} Songs`)
+
+    playlist_data.songs.forEach(song => {
+        addNewItemToList(song.id, song.image[0].link, song.name, song.primaryArtists, song.album.name, song.playCount, song.duration)
+    })
 }
