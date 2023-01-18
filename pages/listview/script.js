@@ -63,12 +63,36 @@ function updateInfoPanel(img_src, title, subtitle) {
 
 import { fetchPlaylistDetails } from '../../modules/api-requests.js'
 
+function formatPlayCount(play_count) {
+    let formatter = Intl.NumberFormat('en', { notation: 'compact' });
+    let count = formatter.format(play_count);
+    return count;
+}
+
+function padNumber(num) {
+    return String(num).padStart(2, '0');
+}
+
+function formatDuration(total_seconds) {
+    let seconds = total_seconds % 60;
+    let minutes = Math.floor((total_seconds % 3600) / 60);
+    let hours = Math.floor(total_seconds / 3600);
+
+    let result = [minutes, seconds];
+    if (hours > 0) { result.unshift(hours) }
+
+    result = result.map(padNumber);
+
+    return result.join(':')
+}
+
 async function generateFromPlaylistID(playlist_api_id) {
     let playlist_data = await fetchPlaylistDetails(playlist_api_id);
 
     updateInfoPanel(playlist_data.image[2].link, playlist_data.name, `${playlist_data.songCount} Songs`)
 
     playlist_data.songs.forEach(song => {
-        addNewItemToList(song.id, song.image[0].link, song.name, song.primaryArtists, song.album.name, song.playCount, song.duration)
+        addNewItemToList(song.id, song.image[0].link, song.name, song.primaryArtists,
+                         song.album.name, formatPlayCount(song.playCount), formatDuration(song.duration))
     })
 }
