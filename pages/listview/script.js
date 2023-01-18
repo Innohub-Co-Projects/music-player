@@ -41,3 +41,16 @@ function createListItem(api_id, img_src, audio_title, audio_artist, audio_album,
 
     return list_item
 }
+
+function updateInfoPanel(img_src, title, subtitle) {
+    let info_panel = document.querySelector('.info_panel')
+
+    let img = info_panel.querySelector('.header_img');
+    img.src = img_src;
+
+    let title_element = info_panel.querySelector('.title');
+    title_element.textContent = title;
+
+    let subtitle_element = info_panel.querySelector('.subtitle');
+    subtitle_element.textContent = subtitle;
+}
