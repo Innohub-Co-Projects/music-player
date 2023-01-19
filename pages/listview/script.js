@@ -9,8 +9,8 @@ function newElement(type_str, attributes_obj, textContent = '') {
     return element;
 }
 
-function createListItem(api_id, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration) {
-    let list_item = newElement('div', { class: 'list_item', 'data-api-id': api_id });
+function createListItem(api_id, index, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration) {
+    let list_item = newElement('div', { class: 'list_item', 'data-api-id': api_id, 'data-index': index });
 
     let img = document.createElement('img');
     img.src = img_src;
@@ -86,29 +86,34 @@ function formatDuration(total_seconds) {
     return result.join(':')
 }
 
+function generateListItems(api_data) {
+    api_data.songs.forEach((song, index) => {
+        addNewItemToList(song.id, index, song.image[0].link, song.name, song.primaryArtists,
+                         song.album.name, compactFormat(song.playCount), formatDuration(song.duration))
+    })
+}
+
+var api_data;
+
 async function generateFromPlaylistID(playlist_api_id) {
     let playlist_data = await fetchPlaylistDetails(playlist_api_id);
+    api_data = playlist_data;
 
     let subtitle = `${playlist_data.songCount} Songs | ${compactFormat(playlist_data.followerCount)} followers <br>
                     By: ${playlist_data.firstname + playlist_data.lastname}`
 
     updateInfoPanel(playlist_data.image[2].link, playlist_data.name, subtitle)
 
-    playlist_data.songs.forEach(song => {
-        addNewItemToList(song.id, song.image[0].link, song.name, song.primaryArtists,
-                         song.album.name, compactFormat(song.playCount), formatDuration(song.duration))
-    })
+    generateListItems(api_data)
 }
 
 async function generateFromAlbumID(album_api_id) {
     let album_data = await fetchAlbumDetails(album_api_id);
+    api_data = album_data;
 
     let subtitle = `${album_data.songCount} Songs <br>By: ${album_data.primaryArtists}`
 
     updateInfoPanel(album_data.image[2].link, album_data.name, subtitle);
 
-    album_data.songs.forEach(song => {
-        addNewItemToList(song.id, song.image[0].link, song.name, song.primaryArtists,
-                         song.album.name, compactFormat(song.playCount), formatDuration(song.duration));
-    })
+    generateListItems(api_data)
 }
