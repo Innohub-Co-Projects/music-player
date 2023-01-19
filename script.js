@@ -142,3 +142,31 @@ next.addEventListener('click', ()=>{
 
     iframe_functions.nextSong().play()
 })
+
+// list view stuff:
+
+function generateListOnLoad(e) {
+    let frame_functions = iframe.contentWindow
+    if (e.target.type == 'playlist') {
+        frame_functions.generateFromPlaylistID(e.target.api_id);
+    }
+    else if (e.target.type == 'album') {
+        frame_functions.generateFromAlbumID(e.target.api_id);
+    }
+    else {
+        console.error('Invalid list view type: ' + e.target.type);
+        return;
+    }
+
+    iframe.removeEventListener('load', generateListOnLoad)
+    delete iframe.type
+    delete iframe.api_id
+}
+
+function displayListView(type, api_id) {
+    iframe.type = type;
+    iframe.api_id = api_id;
+    iframe.addEventListener('load', generateListOnLoad)
+
+    iframe.src = './pages/listview/listview.html';
+}

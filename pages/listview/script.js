@@ -128,6 +128,9 @@ async function generateFromAlbumID(album_api_id) {
     generateListItems(api_data)
 }
 
+window.generateFromAlbumID = generateFromAlbumID;
+window.generateFromPlaylistID = generateFromPlaylistID
+
 function playSongByIndex(list_item_index) {
     let song = api_data.songs[list_item_index]
 
