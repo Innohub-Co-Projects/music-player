@@ -87,7 +87,7 @@ function addTrendingAlbums(api_id, content_type, title, subtitle, img_src) {
     trendingList.appendChild(card)
 }
 
-import { fetchHomepage } from '../../modules/api-requests.js'
+import { fetchHomepage, fetchSongDetails } from '../../modules/api-requests.js'
 
 let homepageInfo = await fetchHomepage()
 
@@ -109,4 +109,21 @@ homepageInfo.trending.songs.forEach(song => {
 
 homepageInfo.trending.albums.forEach(albums => {
     addTrendingAlbums(albums.id, albums.type, albums.name, '', albums.image[1].link)
+})
+
+async function playSongByID(song_api_id) {
+    let song_data = await fetchSongDetails(song_api_id)
+
+    parent.playAudio(song_data.downloadUrl[2].link, song_data.name, song_data.primaryArtists, song_data.image[0].link)
+}
+
+document.querySelectorAll('.content_card').forEach(card => {
+    card.addEventListener('click', () => {
+        if (card.dataset.type == 'song') {
+            playSongByID(card.dataset.apiId);
+            return;
+        }
+
+        parent.displayListView(card.dataset.type, card.dataset.apiId);
+    })
 })
