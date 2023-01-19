@@ -58,14 +58,14 @@ function updateInfoPanel(img_src, title, subtitle) {
     title_element.textContent = title;
 
     let subtitle_element = info_panel.querySelector('.subtitle');
-    subtitle_element.textContent = subtitle;
+    subtitle_element.innerHTML = subtitle;
 }
 
 import { fetchPlaylistDetails } from '../../modules/api-requests.js'
 
-function formatPlayCount(play_count) {
+function compactFormat(num) {
     let formatter = Intl.NumberFormat('en', { notation: 'compact' });
-    let count = formatter.format(play_count);
+    let count = formatter.format(num);
     return count;
 }
 
@@ -89,10 +89,13 @@ function formatDuration(total_seconds) {
 async function generateFromPlaylistID(playlist_api_id) {
     let playlist_data = await fetchPlaylistDetails(playlist_api_id);
 
-    updateInfoPanel(playlist_data.image[2].link, playlist_data.name, `${playlist_data.songCount} Songs`)
+    let subtitle = `${playlist_data.songCount} Songs | ${compactFormat(playlist_data.followerCount)} followers <br>
+                    By: ${playlist_data.firstname + playlist_data.lastname}`
+
+    updateInfoPanel(playlist_data.image[2].link, playlist_data.name, subtitle)
 
     playlist_data.songs.forEach(song => {
         addNewItemToList(song.id, song.image[0].link, song.name, song.primaryArtists,
-                         song.album.name, formatPlayCount(song.playCount), formatDuration(song.duration))
+                         song.album.name, compactFormat(song.playCount), formatDuration(song.duration))
     })
 }
