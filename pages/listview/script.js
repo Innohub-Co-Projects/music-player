@@ -86,11 +86,21 @@ function formatDuration(total_seconds) {
     return result.join(':')
 }
 
+function addListItemClickEvents() {
+    document.querySelectorAll('.list_item').forEach(list_item => {
+        list_item.addEventListener('click', e => {
+            let item_index = list_item.dataset.index;
+            playSongByIndex(item_index);
+        })
+    })
+}
+
 function generateListItems(api_data) {
     api_data.songs.forEach((song, index) => {
         addNewItemToList(song.id, index, song.image[0].link, song.name, song.primaryArtists,
                          song.album.name, compactFormat(song.playCount), formatDuration(song.duration))
     })
+    addListItemClickEvents()
 }
 
 var api_data;
@@ -116,4 +126,10 @@ async function generateFromAlbumID(album_api_id) {
     updateInfoPanel(album_data.image[2].link, album_data.name, subtitle);
 
     generateListItems(api_data)
+}
+
+function playSongByIndex(list_item_index) {
+    let song = api_data.songs[list_item_index]
+
+    parent.playAudio(song.downloadUrl[2].link, song.name, song.primaryArtists, song.image[0].link)
 }
