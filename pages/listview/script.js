@@ -42,8 +42,8 @@ function createListItem(api_id, index, img_src, audio_title, audio_artist, audio
     return list_item
 }
 
-function addNewItemToList(api_id, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration) {
-    let li = createListItem(api_id, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration);
+function addNewItemToList(api_id, index, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration) {
+    let li = createListItem(api_id, index, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration);
     let list = document.querySelector('.list');
     list.appendChild(li);
 }
