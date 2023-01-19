@@ -1,8 +1,21 @@
+function decodeHTMLentities(string) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = string;
+    return txt.value;
+}
+
+function decodeJsonHTMLentities(json_object) {
+    let json_string = JSON.stringify(json_object);
+    let new_string = json_string.replace(/&quot;/g, `\\\"`)
+    let decoded_string = decodeHTMLentities(new_string);
+    return JSON.parse(decoded_string);
+}
+
 async function fetchJSON(url) {
     try {
         let obj = await (await fetch(url)).json();
         if (obj.status === 'FAILED') { throw obj.message };
-        return obj.data;
+        return decodeJsonHTMLentities(obj.data);
     }
     catch(e) {
         console.error("API request failed: " + e);
