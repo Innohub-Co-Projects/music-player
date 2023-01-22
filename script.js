@@ -1,3 +1,14 @@
+// set correct height for mobile:
+// otherwise navbar is initially hidden on mobile
+function resetHeight(){
+    document.body.style.height = window.innerHeight + "px";
+}
+
+window.addEventListener("resize", resetHeight);
+
+// called to initially set the height.
+resetHeight();
+
 // Navigation functions:
 
 let iframe = document.querySelector('iframe');
