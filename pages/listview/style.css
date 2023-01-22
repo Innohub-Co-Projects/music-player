@@ -21,7 +21,6 @@ body {
     min-height: 272px;
     background-color: #080e18;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
 }
 
@@ -98,6 +97,7 @@ body {
     outline-offset: -1px;
     width: 100%;
     height: 4.5em;
+    cursor: pointer;
 
     display: flex;
     flex-direction: row;
@@ -142,4 +142,59 @@ body {
 
 #like_button i {
     padding-top: 3px;
+}
+
+@media screen and (max-width:600px) {
+    .info_panel {
+        flex-direction: column;
+        height: fit-content;
+        min-height: unset;
+        justify-content: center;
+    }
+
+    .info_panel img {
+        width: 50%;
+        margin: 1em;
+        height: auto;
+    }
+
+    .title {
+        line-height: 40px;
+    }
+
+    .side_container {
+        width: 90%;
+        height: 13em;
+        margin-bottom: 10px;
+    }
+
+    /* play count is hidden */
+    .bi-eye {
+        display: none;
+    }
+
+    #play_count {
+        display: none;
+    }
+
+    .list_item .info {
+        grid-template-columns: 1fr 1fr 0.3fr;
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    #like_button {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    .list {
+        margin-top: 0.7em;
+    }
+
+    .list header {
+        grid-template-columns: 1fr 1fr 0.3fr;
+        padding-left: 4.4em;
+        padding-right: 4.5em;
+    }
 }
