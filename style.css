@@ -7,7 +7,7 @@
 }
 
 body {
-    width: 100%;
+    min-width: 10vh;
     height: 100vh;
     background-color: #131312;
     font-family: 'Poppins', sans-serif;
@@ -17,7 +17,7 @@ body {
 }
 
 header {
-    width: 100%;
+    min-width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -35,12 +35,12 @@ header .menu_side,
 }
 
 header .song_side {
-    width: 85%;
+    flex: 1;
     background: #0b1320;
 }
 
 header .master_play {
-    width: 100%;
+    min-width: 100%;
     height: 10%;
     background: #111727;
     box-shadow: 0px 3px 8px #090f1f;
@@ -59,6 +59,7 @@ header .menu_side .menu {
 header .menu_side .menu .menu_item {
     font-size: 15px;
     width: 90%;
+    min-width: 90%;
     height: 2.5em;
     border: 0;
     border-radius: 12px;
@@ -213,7 +214,7 @@ header .master_play img {
 }
 
 header .master_play h5 {
-    width: 130px;
+    min-width: 130px;
     font-size: 13px;
     margin-left: 15px;
     color: #fff;
@@ -224,12 +225,13 @@ header .master_play h5 .subtitle {
     font-size: 11px;
     color: #4c5262;
 }
-
-header .master_play .icon {
-    font-size: 20px;
-    color: #fff;
-    margin: 0px 20px 0px 40px;
-    outline: none;
+header .master_play .icon{
+   font-size: 20px;
+   color: #fff;
+   margin: 0px 10px 0px 20px;
+   outline: none;
+   display:inline-flex;
+   align-items: center;
 }
 
 header .master_play .icon .bi {
@@ -392,46 +394,41 @@ header .song_side nav ul li {
     margin-right: 25px;
     cursor: pointer;
     transition: .3s linear;
-}
-
-header .song_side nav ul li:hover {
-    color: #fff;
-}
-
-header .song_side nav ul li:nth-child(1) {
-    color: #fff;
-}
-
-header .song_side nav ul li span {
-    position: absolute;
-    width: 100%;
-    height: 2.5px;
-    background: #36e2ec;
-    bottom: -5px;
-    left: 0;
-    border-radius: 20px;
-}
-
-header .song_side nav .search {
-    position: relative;
-    width: 40%;
-    padding: 1px 10px;
-    border-radius: 20px;
-    color: gray;
-}
-
-header .song_side nav .search::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    background: rgb(184, 184, 184, .1);
-    backdrop-filter: blur(5px);
-    z-index: -1;
-}
-
-header .song_side nav .search .bi {
+ }
+ header .song_side nav ul li:hover{
+   color: #fff;
+ }
+ header .song_side nav ul li:nth-child(1){
+   color: #fff;
+ }
+ header .song_side nav ul li span{
+   position: absolute;
+   width: 100%;
+   height: 2.5px;
+   background: #36e2ec;
+   bottom: -5px;
+   left: 0;
+   border-radius: 20px;
+ }
+ header .song_side nav .search{
+   position: relative;
+   width: 40%;
+   display: flex;
+   padding: 1px 10px;
+   border-radius: 20px;
+   color: gray;
+ }
+ header .song_side nav .search::before{
+     content: '';
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   border-radius: 20px;
+   background: rgb(184, 184, 184,.1);
+   backdrop-filter: blur(5px);
+   z-index: -1;
+ }
+ header .song_side nav .search .bi{
     font-size: 13px;
     padding: 3px 0px 0px 10px;
 }
