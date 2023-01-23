@@ -35,7 +35,7 @@ header .menu_side,
 }
 
 header .song_side {
-    min-width:85%;
+    flex: 1;
     background: #0b1320;
 }
 
@@ -57,7 +57,8 @@ header .menu_side .menu {
 }
 
 header .menu_side .menu .menu_item {
-    font-size: 10px;
+    font-size: 15px;
+    width: 90%;
     min-width: 90%;
     height: 2.5em;
     border: 0;
@@ -230,6 +231,7 @@ header .master_play .icon{
    margin: 0px 10px 0px 20px;
    outline: none;
    display:inline-flex;
+   align-items: center;
 }
 
 header .master_play .icon .bi {
@@ -372,7 +374,7 @@ header .song_side {
 
 header .song_side nav {
     width: 90%;
-    height: 20%;
+    height: 10%;
     margin: auto;
     /* border: 1px solid #fff; */
     display: flex;
