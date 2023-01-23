@@ -1,96 +1,53 @@
-let music = parent.music;
-let masterPlay = parent.document.getElementById('masterPlay');
-let wave = parent.document.getElementsByClassName('wave')[0];
+// ids are very important for a song object
+// they determine the img and audio src path for the song
+class Song {
+    constructor(id, title, subtitle) {
+        this.id = id;
+        this.title = title;
+        this.subtitle = subtitle;
+    }
+
+    getSrc() {
+        return `./pages/my-library/audio/${this.id}.mp3`
+    }
+
+    getPoster() {
+        return `./img/${this.id}.jpg`
+    }
+
+    play() {
+        let song_thumbnail = "./pages/my-library/" + this.getPoster()
+        parent.playAudio(this.getSrc(), this.title, this.subtitle, song_thumbnail)
+        current_song_id = this.id;
+    }
+}
 
 // create Array 
-
 var songs = [
-    {
-        id:'1',
-        songName:` On My Way <br>
-        <div class="subtitle">Alan Walker</div>`,
-        poster: "./img/1.jpg"
-    },
-    {
-        id:'2',
-        songName:` Alan Walker-Fade <br>
-        <div class="subtitle">Alan Walker</div>`,
-        poster: "./img/2.jpg"
-    },
-    // all object type 
-    {
-        id:"3",
-        songName: `Cartoon - On & On <br><div class="subtitle"> Daniel Levi</div>`,
-        poster: "./img/3.jpg",
-    },
-    {
-        id:"4",
-        songName: `Warriyo - Mortals <br><div class="subtitle">Mortals</div>`,
-        poster: "./img/4.jpg",
-    },
-    {
-        id:"5",
-        songName: `Ertugrul Gazi <br><div class="subtitle">Ertugrul</div>`,
-        poster: "./img/5.jpg",
-    },
-    {
-        id:"6",
-        songName: `Electronic Music <br><div class="subtitle">Electro</div>`,
-        poster: "./img/6.jpg",
-    },
-    {
-        id:"7",
-        songName: `Agar Tum Sath Ho <br><div class="subtitle">Tamashaa</div>`,
-        poster: "./img/7.jpg",
-    },
-    {
-        id:"8",
-        songName: `Suna Hai <br><div class="subtitle">Neha Kakker</div>`,
-        poster: "./img/8.jpg",
-    },
-    {
-        id:"9",
-        songName: `Dilber <br><div class="subtitle">Satyameva Jayate</div>`,
-        poster: "./img/9.jpg",
-    },
-    {
-        id:"10",
-        songName: `Duniya <br><div class="subtitle">Luka Chuppi</div>`,
-        poster: "./img/10.jpg",
-    },
-    {
-        id:"11",
-        songName: `Lagdi Lahore Di <br><div class="subtitle">Street Dancer 3D</div>`,
-        poster: "./img/11.jpg",
-    },
-    {
-        id:"12",
-        songName: `Putt Jatt Da <br><div class="subtitle">Putt Jatt Da</div>`,
-        poster: "./img/12.jpg",
-    },
-    {
-        id:"13",
-        songName: `Baarishein <br><div class="subtitle">Atif Aslam</div>`,
-        poster: "./img/13.jpg",
-    },
-    {
-        id:"14",
-        songName: `Vaaste <br><div class="subtitle">Dhvani Bhanushali</div>`,
-        poster: "./img/14.jpg",
-    },
-    {
-        id:"15",
-        songName: `Lut Gaye <br><div class="subtitle">Jubin Nautiyal</div>`,
-        poster: "./img/15.jpg",
-    },
+    new Song(1, "On My Way", "Alan Walker"),
+    new Song(2, "Fade", "Alan Walker"),
+    new Song(3, "Cartoon - On & On", "Daniel Levi"),
+    new Song(4, "Warriyo - Mortals", "Mortals"),
+    new Song(5, "Ertugrul Gazi", "Ertugrul"),
+    new Song(6, "Electronic Music", "Electro"),
+    new Song(7, "Agar Tum Sath Ho", "Tamashaa"),
+    new Song(8, "Suna Hai", "Neha Kakker"),
+    new Song(9, "Dilber", "Satyameva Jayate"),
+    new Song(10, "Duniya", "Luka Chuppi"),
+    new Song(11, "Lagdi Lahore Di", "Street Dancer 3D"),
+    new Song(12, "Putt Jatt Da", "Putt Jatt Da"),
+    new Song(13, "Baarishein", "Atif Aslam"),
+    new Song(14, "Vaaste", "Dhvani Bhanushali"),
+    new Song(15, "Lut Gaye", "Jubin Nautiyal")
 ]
 
 let song_elements = Array.from(document.getElementsByClassName('songItem'))
 let play_button_elements = Array.from(document.getElementsByClassName('playListPlay'))
 
 song_elements.forEach((element, i)=>{
-    element.getElementsByTagName('img')[0].src = songs[i].poster;
-    element.getElementsByTagName('h5')[0].innerHTML = songs[i].songName;
+    element.getElementsByTagName('img')[0].src = songs[i].getPoster();
+    let title_text = `${songs[i].title} <br> <div class="subtitle">${songs[i].subtitle}</div>`
+    element.getElementsByTagName('h5')[0].innerHTML = title_text;
 })
 
 const makeAllPlays = () =>{
@@ -105,60 +62,60 @@ const makeAllBackgrounds = () =>{
     })
 }
 
-let index = 0;
-let poster_master_play = parent.document.getElementById('poster_master_play');
-let title = parent.document.getElementById('title');
+// active here just means that it has a pause icon instead of a play icon
+function setSongElementActive(song_element) {
+    makeAllPlays();
+    let icon = song_element.querySelector('i')
+    icon.classList.remove('bi-play-circle-fill');
+    icon.classList.add('bi-pause-circle-fill');
+    makeAllBackgrounds();
+    song_element.style.background = "rgb(105, 105, 170, .1)";
+}
+
+function setSongElementActiveByID(song_id) {
+    let element = song_elements[song_id - 1]
+    setSongElementActive(element)
+}
+
+var current_song_id = 0;
+
+function nextSong() {
+    let next_index = current_song_id >= songs.length ? 0 : current_song_id;
+    let song = songs[next_index]
+    return song;
+}
+
+function previousSong() {
+    let prev_index = current_song_id - 2 < 0 ? songs.length - 1 : current_song_id - 2
+    let song = songs[prev_index]
+    return song;
+}
 
 play_button_elements.forEach((element)=>{
     element.addEventListener('click', (e)=>{
-        index = e.target.id;
-        parent.index = e.target.id;
-        makeAllPlays();
-        e.target.classList.remove('bi-play-circle-fill');
-        e.target.classList.add('bi-pause-circle-fill');
-        music.src = `./pages/my-library/audio/${index}.mp3`;
-        poster_master_play.src =`./pages/my-library/img/${index}.jpg`;
-        music.play();
-        let song_title = songs.filter((ele)=>{
-            return ele.id == index;
-        })
+        let song_id = e.target.id;
 
-        song_title.forEach(ele =>{
-            let {songName} = ele;
-            title.innerHTML = songName;
-        })
-        masterPlay.classList.remove('bi-play-fill');
-        masterPlay.classList.add('bi-pause-fill');
-        wave.classList.add('active2');
-        music.addEventListener('ended',()=>{
-            masterPlay.classList.add('bi-play-fill');
-            masterPlay.classList.remove('bi-pause-fill');
-            wave.classList.remove('active2');
-        })
-        makeAllBackgrounds();
-        song_elements[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
+        setSongElementActiveByID(song_id)
+
+        let song = songs[song_id - 1]
+        song.play()
     })
 })
 
-let left_scroll = document.getElementById('left_scroll');
-let right_scroll = document.getElementById('right_scroll');
-let pop_song = document.getElementsByClassName('pop_song')[0];
+// adds event listeners for all scroll buttons on the library page
+// assumes that the scrollable list is the second element of the parent container
+let button_containers = document.querySelectorAll('.btn_s')
+button_containers.forEach(button_container => {
+    let section_container = button_container.parentElement.parentElement
+    let list = section_container.children[1]
 
-left_scroll.addEventListener('click', ()=>{
-    pop_song.scrollLeft -= 330;
-})
-right_scroll.addEventListener('click', ()=>{
-    pop_song.scrollLeft += 330;
-})
+    let left_button = button_container.querySelector('#left_scroll')
+    let right_button = button_container.querySelector('#right_scroll')
 
-
-let left_scrolls = document.getElementById('left_scrolls');
-let right_scrolls = document.getElementById('right_scrolls');
-let item = document.getElementsByClassName('item')[0];
-
-left_scrolls.addEventListener('click', ()=>{
-    item.scrollLeft -= 330;
-})
-right_scrolls.addEventListener('click', ()=>{
-    item.scrollLeft += 330;
+    left_button.addEventListener('click', ()=>{
+        list.scrollLeft -= 330;
+    })
+    right_button.addEventListener('click', ()=>{
+        list.scrollLeft += 330;
+    })
 })

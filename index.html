@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
@@ -12,14 +11,12 @@
 
 <body>
 
-
-
 <header>
     <div class="menu_side">
         <h1>Menu</h1>
         <nav class="menu" >
-            <div class="menu_item active" onclick="navTo('discover')">
-                <i class="bi bi-compass-fill"></i>
+            <div class="menu_item active" onclick="navTo('homepage')">
+            <i class="bi bi-house-fill"></i>
                 Homepage
             </div>
             <div class="menu_item" onclick="navTo('my-library')">
@@ -37,7 +34,6 @@
         </nav>
     </div>
 
-
     <div class="song_side">
         <nav>
             <h3 id="section_title">Homepage</h3>
@@ -50,9 +46,8 @@
             </div>
         </nav>
 
-        <iframe src="./pages/my-library/my-library.html" frameborder="0"></iframe>
+        <iframe src="./pages/homepage/homepage.html" frameborder="0"></iframe>
     </div>
-
 
     <div class="master_play">
         <div class="wave">
@@ -86,13 +81,15 @@
     </div>
 
     <div class="nav_bar">
-        <i class="bi bi-house-fill"></i>
-        <i class="bi bi-bullseye"></i>
-        <i class="bi bi-search"></i>
+        <i class="bi bi-house-fill" onclick="navTo('homepage')"></i>
+        <i class="bi bi-journal-album" onclick="navTo('my-library')"></i>
+        <i class="bi bi-music-note-list" onclick="navTo('lyrics')"></i>
         <i class="bi bi-heart-fill"></i>
     </div>
 </header>
-    <script src="script.js"></script>
+
+<script src="script.js"></script>
+
 </body>
 
 </html>
