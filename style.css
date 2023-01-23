@@ -410,7 +410,8 @@ header .song_side nav ul li {
  }
  header .song_side nav .search{
    position: relative;
-   min-width: 50%;
+   width: 40%;
+   display: flex;
    padding: 1px 10px;
    border-radius: 20px;
    color: gray;
