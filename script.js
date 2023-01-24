@@ -29,13 +29,16 @@ function setNavElementActive(nav_element) {
     nav_element.classList.add('active')
 }
 
+function setSectionTitle(title) {
+    let section_title = document.querySelector('#section_title');
+    section_title.textContent = title;
+}
+
 // set nav element as active and change title when click on a nav element
 document.querySelectorAll('.menu_item').forEach(menu_item => {
-    let title = document.querySelector('#section_title')
-
     menu_item.addEventListener('click', (e) => {
         setNavElementActive(e.target)
-        title.textContent = e.target.textContent
+        setSectionTitle(e.target.textContent)
     })
 })
 
