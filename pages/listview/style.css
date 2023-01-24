@@ -138,6 +138,7 @@ body {
 
 .info .title_container #artist {
     font-size: x-small;
+    -webkit-line-clamp: 1;
 }
 
 #like_button {
