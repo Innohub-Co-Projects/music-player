@@ -31,7 +31,7 @@ async function fetchHomepage(language = 'hindi, english') {
 
 async function fetchSongDetails(song_id) {
     let url = 'https://saavn.me/songs?id=' + song_id;
-    return (await fetchJSON(url))[0];
+    return await fetchJSON(url);
 }
 
 async function fetchPlaylistDetails(playlist_id) {
