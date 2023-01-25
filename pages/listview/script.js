@@ -62,6 +62,7 @@ function updateInfoPanel(img_src, title, subtitle) {
 }
 
 import { fetchPlaylistDetails, fetchAlbumDetails } from '../../modules/api-requests.js'
+import { addLikedSongID, fetchLikedSongs } from '../../modules/like-songs.js'
 
 function compactFormat(num) {
     let formatter = Intl.NumberFormat('en', { notation: 'compact' });
@@ -86,12 +87,25 @@ function formatDuration(total_seconds) {
     return result.join(':')
 }
 
+function addLikeButtonListener(list_item) {
+    let like_button = list_item.querySelector('#like_button');
+    let song_api_id = list_item.dataset.apiId;
+
+    like_button.addEventListener('click', (event) => {
+        event.stopPropagation(); // don't trigger parent click events
+        addLikedSongID(song_api_id);
+        like_button.style.color = '#d00';
+    })
+}
+
 function addListItemClickEvents() {
     document.querySelectorAll('.list_item').forEach(list_item => {
         list_item.addEventListener('click', e => {
             let item_index = list_item.dataset.index;
             playSongByIndex(item_index);
         })
+
+        addLikeButtonListener(list_item);
     })
 }
 
