@@ -147,6 +147,11 @@ body {
     width: 2.5em;
     background-color: #080e18;
     border: 1px solid #424050;
+    transition: 0.3s;
+}
+
+#like_button:hover {
+    background-color: #424050;
 }
 
 #like_button i {
