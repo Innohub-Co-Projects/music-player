@@ -159,11 +159,46 @@ header .lang_indicator {
     padding: 10px;
     color: #bbb;
     cursor: pointer;
-    transition: color 0.3s;
 }
 
-header .lang_indicator:hover {
+header .lang_indicator .lang_dropup {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    bottom: 2em;
+    width: 100%;
+    background-color: #0B1320;
+    padding: 10px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8px;
+    row-gap: 5px;
+    justify-items: center;
+    border: 1px solid #222;
+}
+
+header .lang_indicator .lang_dropup[data-state="open"] {
+    display: grid;
+}
+
+header .lang_indicator .lang_dropup span {
+    width: 100%;
+    padding: 0.3em;
+    border: 0;
+    border-radius: 8px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+header .lang_indicator span:hover {
     color: #fff;
+}
+
+header .lang_indicator .lang_dropup span[data-state="active"] {
+    color: #fff;
+    background-color: #4c5262;
+}
+
+header .lang_indicator .lang_dropup span[data-state="active"]:hover {
+    background-color: #2b3247;
 }
 
 header .master_play {
