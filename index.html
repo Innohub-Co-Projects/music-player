@@ -28,7 +28,7 @@
                 Lyric Search
             </div>
             <hr>
-            <h4 class="menu_item"><span></span><i class="bi bi-music-note-beamed"></i>Liked Songs</h4>
+            <h4 class="menu_item" onclick="displayLikedSongs()"><span></span><i class="bi bi-music-note-beamed"></i>Liked Songs</h4>
             <h4 class="menu_item"><span></span><i class="bi bi-music-note-beamed"></i>Last Listening</h4>
             <h4 class="menu_item"><span></span><i class="bi bi-music-note-beamed"></i>About</h4>
         </nav>
@@ -84,7 +84,7 @@
         <i class="bi bi-house-fill" onclick="navTo('homepage'); setSectionTitle('Homepage')"></i>
         <i class="bi bi-journal-album" onclick="navTo('my-library'); setSectionTitle('My Library')"></i>
         <i class="bi bi-music-note-list" onclick="navTo('lyrics'); setSectionTitle('Lyrics Search')"></i>
-        <i class="bi bi-heart-fill"></i>
+        <i class="bi bi-heart-fill" onclick="displayLikedSongs(); setSectionTitle('Liked Songs')"></i>
     </div>
 </header>
 

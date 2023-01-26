@@ -184,3 +184,15 @@ function displayListView(type, api_id) {
 
     iframe.src = './pages/listview/listview.html';
 }
+
+function generateLikedSongsOnLoad() {
+    let iframe_functions = iframe.contentWindow
+    iframe_functions.generateFromLikedSongs()
+
+    iframe.removeEventListener('load', generateLikedSongsOnLoad)
+}
+
+function displayLikedSongs() {
+    iframe.addEventListener('load', generateLikedSongsOnLoad)
+    iframe.src = './pages/listview/listview.html'
+}
