@@ -46,6 +46,11 @@ header .master_play {
     box-shadow: 0px 3px 8px #090f1f;
 }
 
+header .menu_side {
+    display: flex;
+    flex-direction: column;
+}
+
 header .menu_side h1 {
     font-size: 20px;
     margin: 25px 0px 0px 25px;
@@ -141,6 +146,24 @@ header .menu_side hr {
     margin-top: 0.4em;
     margin-bottom: 0.4em;
     color: #555;
+}
+
+header .lang_indicator {
+    margin-top: auto;
+    width: 90%;
+    height: 2em;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: #bbb;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+header .lang_indicator:hover {
+    color: #fff;
 }
 
 header .master_play {
