@@ -117,7 +117,7 @@ function generateListItems(api_data) {
     addListItemClickEvents()
 }
 
-var api_data;
+var api_data = {};
 
 async function generateFromPlaylistID(playlist_api_id) {
     let playlist_data = await fetchPlaylistDetails(playlist_api_id);
@@ -142,8 +142,21 @@ async function generateFromAlbumID(album_api_id) {
     generateListItems(api_data)
 }
 
+async function generateFromLikedSongs() {
+    api_data.songs = await fetchLikedSongs();
+
+    let heart_img_link = 'https://upload.wikimedia.org/wikipedia/commons/3/35/Red-simple-heart-symbol-only.png';
+    let title = 'Liked Songs';
+    let subtitle = `${api_data.songs.length} Songs <br>Saved by you`;
+
+    updateInfoPanel(heart_img_link, title, subtitle)
+
+    generateListItems(api_data)
+}
+
 window.generateFromAlbumID = generateFromAlbumID;
 window.generateFromPlaylistID = generateFromPlaylistID
+window.generateFromLikedSongs = generateFromLikedSongs
 
 function playSongByIndex(list_item_index) {
     let song = api_data.songs[list_item_index]
