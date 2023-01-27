@@ -196,3 +196,32 @@ function displayLikedSongs() {
     iframe.addEventListener('load', generateLikedSongsOnLoad)
     iframe.src = './pages/listview/listview.html'
 }
+
+// language code:
+
+function toggleLangDropup() {
+    let dropup = document.querySelector('.lang_dropup')
+
+    if (dropup.dataset.state == 'open') {
+        dropup.dataset.state = 'closed';
+    }
+    else {
+        dropup.dataset.state = 'open';
+    }
+}
+
+function closeDropupOnClick(event) {
+    let lang_elements = document.querySelector('.lang_indicator')
+    let dropup = document.querySelector('.lang_dropup')
+
+    if (lang_elements.contains(event.target)) { return }
+
+    dropup.dataset.state = 'closed'
+}
+
+// toggle dropup when lang indicator is clicked
+document.querySelector('.lang_indicator span').addEventListener('click', toggleLangDropup)
+
+// close dropup when clicked outside of dropup
+document.addEventListener('click', closeDropupOnClick)
+iframe.contentWindow.addEventListener('click', closeDropupOnClick)
