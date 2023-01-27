@@ -18,8 +18,8 @@ function getLanguageString() {
 }
 
 function addLanguage(language) {
-    let lang_arr = getLanguageArray().push(language);
-
+    let lang_arr = getLanguageArray()
+    lang_arr.push(language);
     setLanguagesByArray(lang_arr);
 }
 
