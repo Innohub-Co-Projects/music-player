@@ -30,3 +30,5 @@ function removeLanguage(language) {
 
     setLanguagesByArray(lang_arr)
 }
+
+export { setLanguagesByArray, getLanguageArray, getLanguageString, addLanguage, removeLanguage }
