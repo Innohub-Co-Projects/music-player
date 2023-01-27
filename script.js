@@ -20,6 +20,7 @@ function frameNavigate(url) {
 function navTo(destination) {
     frameNavigate('./pages/' + destination + '/' + destination + '.html')
 }
+window.navTo = navTo;
 
 function setNavElementActive(nav_element) {
     document.querySelectorAll('.menu_item').forEach(menu_item => {
@@ -33,6 +34,7 @@ function setSectionTitle(title) {
     let section_title = document.querySelector('#section_title');
     section_title.textContent = title;
 }
+window.setSectionTitle = setSectionTitle
 
 // set nav element as active and change title when click on a nav element
 document.querySelectorAll('.menu_item').forEach(menu_item => {
@@ -58,6 +60,7 @@ function playAudio(audio_src, audio_title, audio_subtitle, thumbnail_img) {
     let thumbnail = document.getElementById('poster_master_play');
     thumbnail.src = thumbnail_img;
 }
+window.playAudio = playAudio
 
 // change icon on play/pause
 music.addEventListener('pause', () => {
@@ -184,6 +187,7 @@ function displayListView(type, api_id) {
 
     iframe.src = './pages/listview/listview.html';
 }
+window.displayListView = displayListView
 
 function generateLikedSongsOnLoad() {
     let iframe_functions = iframe.contentWindow
@@ -196,6 +200,7 @@ function displayLikedSongs() {
     iframe.addEventListener('load', generateLikedSongsOnLoad)
     iframe.src = './pages/listview/listview.html'
 }
+window.displayLikedSongs = displayLikedSongs
 
 // language code:
 
