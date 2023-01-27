@@ -230,3 +230,73 @@ document.querySelector('.lang_indicator span').addEventListener('click', toggleL
 // close dropup when clicked outside of dropup
 document.addEventListener('click', closeDropupOnClick)
 iframe.contentWindow.addEventListener('click', closeDropupOnClick)
+
+import { addLanguage, removeLanguage, getLanguageArray } from './modules/language.js'
+
+// set initially selected language
+setSelectedLanguages(getLanguageArray())
+updateLangIndicator()
+
+// get selected language options in dropup menu
+function getSelectedLanguages() {
+    let languages = [];
+
+    document.querySelectorAll('.lang_dropup span').forEach(lang_button => {
+        if (lang_button.dataset.state == 'active') {
+            languages.push(lang_button.textContent)
+        }
+    })
+
+    return languages;
+}
+
+// set active options in dropup menu
+function setSelectedLanguages(lang_arr) {
+    document.querySelectorAll('.lang_dropup span').forEach(lang_button => {
+        if (lang_arr.includes(lang_button.textContent)) {
+            lang_button.dataset.state = 'active'
+        }
+        else {
+            lang_button.dataset.state = 'inactive'
+        }
+    })
+}
+
+function updateLangIndicator() {
+    let lang_indicator = document.querySelector('.lang_indicator span')
+    let languages = getSelectedLanguages()
+
+    if (languages.length == 0) {
+        lang_indicator.textContent = 'Lang: default'
+    }
+    else if (languages.length == 1) {
+        lang_indicator.textContent = `Lang: ${languages[0]}`
+    }
+    else {
+        lang_indicator.textContent = 'Lang: multi'
+    }
+}
+
+// go to homepage to show changes
+// and display select language in indicator element
+function updateAfterLangChange() {
+    navTo('homepage')
+
+    updateLangIndicator()
+}
+
+// add or remove language after clicking on a language option
+document.querySelectorAll('.lang_dropup span').forEach(lang_button => {
+    lang_button.addEventListener('click', () => {
+        if (lang_button.dataset.state == 'active') {
+            lang_button.dataset.state = 'inactive'
+            removeLanguage(lang_button.textContent)
+            updateAfterLangChange()
+        }
+        else {
+            lang_button.dataset.state = 'active'
+            addLanguage(lang_button.textContent)
+            updateAfterLangChange()
+        }
+    })
+})

@@ -22,9 +22,11 @@ async function fetchJSON(url) {
     }
 }
 
+import { getLanguageString } from './language.js'
+
 // fetches homepage data
 // contains the following attributes: albums, charts, playlist and trending
-async function fetchHomepage(language = 'hindi, english') {
+async function fetchHomepage(language = getLanguageString()) {
     let url = 'https://saavn.me/modules?language=' + language;
     return await fetchJSON(url);
 }
