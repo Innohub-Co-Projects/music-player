@@ -475,6 +475,8 @@ header .song_side nav ul li {
    padding: 1px 10px;
    border-radius: 20px;
    color: gray;
+   margin-left: auto;
+   margin-right: 30px;
  }
  header .song_side nav .search::before{
      content: '';
