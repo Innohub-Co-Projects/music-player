@@ -9,7 +9,8 @@ function newElement(type_str, attributes_obj, textContent = '') {
     return element;
 }
 
-function createListItem(api_id, index, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration) {
+// this function is pretty big since it has to generate all the individual elements using javascript
+function createListItem(api_id, index, img_src, audio_title, audio_artist, audio_album_name, audio_album_id, audio_play_count, audio_duration) {
     let list_item = newElement('div', { class: 'list_item', 'data-api-id': api_id, 'data-index': index });
 
     let img = document.createElement('img');
@@ -25,7 +26,7 @@ function createListItem(api_id, index, img_src, audio_title, audio_artist, audio
     title_container.appendChild(artist);
     info_container.appendChild(title_container);
 
-    let album = newElement('span', { id: 'album' }, audio_album);
+    let album = newElement('span', { id: 'album', 'data-api-id': audio_album_id }, audio_album_name);
     let play_count = newElement('span', { id: 'play_count' }, audio_play_count);
     let duration = newElement('span', { id: 'duration' }, audio_duration)
     info_container.appendChild(album);
@@ -42,8 +43,8 @@ function createListItem(api_id, index, img_src, audio_title, audio_artist, audio
     return list_item
 }
 
-function addNewItemToList(api_id, index, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration) {
-    let li = createListItem(api_id, index, img_src, audio_title, audio_artist, audio_album, audio_play_count, audio_duration);
+function addNewItemToList(api_id, index, img_src, audio_title, audio_artist, audio_album_name, audio_album_id, audio_play_count, audio_duration) {
+    let li = createListItem(api_id, index, img_src, audio_title, audio_artist, audio_album_name, audio_album_id, audio_play_count, audio_duration);
     let list = document.querySelector('.list');
     list.appendChild(li);
 }
@@ -98,6 +99,16 @@ function addLikeButtonListener(list_item) {
     })
 }
 
+function addAlbumListener(list_item) {
+    let album_element = list_item.querySelector('#album');
+
+    album_element.addEventListener('click', (event) => {
+        event.stopPropagation(); // don't trigger parent element click events
+        let album_id = album_element.dataset.apiId
+        parent.displayListView('album', album_id)
+    })
+}
+
 function addListItemClickEvents() {
     document.querySelectorAll('.list_item').forEach(list_item => {
         list_item.addEventListener('click', e => {
@@ -106,13 +117,14 @@ function addListItemClickEvents() {
         })
 
         addLikeButtonListener(list_item);
+        addAlbumListener(list_item)
     })
 }
 
 function generateListItems(api_data) {
     api_data.songs.forEach((song, index) => {
         addNewItemToList(song.id, index, song.image[0].link, song.name, song.primaryArtists,
-                         song.album.name, compactFormat(song.playCount), formatDuration(song.duration))
+                         song.album.name, song.album.id, compactFormat(song.playCount), formatDuration(song.duration))
     })
     addListItemClickEvents()
 }

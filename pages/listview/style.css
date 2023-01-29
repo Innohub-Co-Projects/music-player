@@ -117,6 +117,10 @@ body {
     text-overflow: ellipsis;
 }
 
+.list_item #album:hover {
+    text-decoration: underline;
+}
+
 .list_item .info {
     flex: 1;
     display: grid;
