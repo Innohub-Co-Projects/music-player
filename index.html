@@ -11,104 +11,102 @@
 
 <body>
 
-<header>
-    <div class="menu_side">
-        <h1>Menu</h1>
-        <nav class="menu" >
-            <div class="menu_item active" onclick="navTo('homepage')">
-            <i class="bi bi-house-fill"></i>
-                Homepage
-            </div>
-            <div class="menu_item" onclick="navTo('my-library')">
-                <i class="bi bi-journal-album"></i>
-                My Library
-            </div>
-            <div class="menu_item" onclick="navTo('lyrics')">
-                <i class="bi bi-music-note-list"></i>
-                Lyric Search
-            </div>
-            <hr>
-            <h4 class="menu_item" onclick="displayLikedSongs()"><span></span><i class="bi bi-music-note-beamed"></i>Liked Songs</h4>
-            <h4 class="menu_item"><span></span><i class="bi bi-music-note-beamed"></i>Last Listening</h4>
-            <h4 class="menu_item"><span></span><i class="bi bi-music-note-beamed"></i>About</h4>
-        </nav>
+<div class="menu_side">
+    <h1>Menu</h1>
+    <nav class="menu" >
+        <div class="menu_item active" onclick="navTo('homepage')">
+        <i class="bi bi-house-fill"></i>
+            Homepage
+        </div>
+        <div class="menu_item" onclick="navTo('my-library')">
+            <i class="bi bi-journal-album"></i>
+            My Library
+        </div>
+        <div class="menu_item" onclick="navTo('lyrics')">
+            <i class="bi bi-music-note-list"></i>
+            Lyric Search
+        </div>
+        <hr>
+        <h4 class="menu_item" onclick="displayLikedSongs()"><span></span><i class="bi bi-music-note-beamed"></i>Liked Songs</h4>
+        <h4 class="menu_item"><span></span><i class="bi bi-music-note-beamed"></i>Last Listening</h4>
+        <h4 class="menu_item"><span></span><i class="bi bi-music-note-beamed"></i>About</h4>
+    </nav>
 
-        <div class="lang_indicator">
-            <span>Lang: English</span>
-            <div class="lang_dropup">
-                <span data-state="active">hindi</span>
-                <span data-state="active">english</span>
-                <span>punjabi</span>
-                <span>tamil</span>
-                <span>telugu</span>
-                <span>marathi</span>
-                <span>gujarati</span>
-                <span>bengali</span>
-                <span>kannada</span>
-                <span>bhojpuri</span>
-                <span>malayalam</span>
-                <span>urdu</span>
-                <span>haryanvi</span>
-                <span>rajasthani</span>
-                <span>odia</span>
-                <span>assamese</span>
-            </div>
+    <div class="lang_indicator">
+        <span>Lang: English</span>
+        <div class="lang_dropup">
+            <span data-state="active">hindi</span>
+            <span data-state="active">english</span>
+            <span>punjabi</span>
+            <span>tamil</span>
+            <span>telugu</span>
+            <span>marathi</span>
+            <span>gujarati</span>
+            <span>bengali</span>
+            <span>kannada</span>
+            <span>bhojpuri</span>
+            <span>malayalam</span>
+            <span>urdu</span>
+            <span>haryanvi</span>
+            <span>rajasthani</span>
+            <span>odia</span>
+            <span>assamese</span>
         </div>
     </div>
+</div>
 
-    <div class="song_side">
-        <nav>
-            <h3 id="section_title">Homepage</h3>
-            <div class="search">
-                <i class="bi bi-search"></i>
-                <input type="text" placeholder="Search Music...">
-            </div>
-            <div class="user">
-                <img src="./bg.jpg" alt="User" title="InnovationHub">
-            </div>
-        </nav>
+<div class="song_side">
+    <nav>
+        <h3 id="section_title">Homepage</h3>
+        <div class="search">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="Search Music...">
+        </div>
+        <div class="user">
+            <img src="./bg.jpg" alt="User" title="InnovationHub">
+        </div>
+    </nav>
 
-        <iframe src="./pages/homepage/homepage.html" frameborder="0"></iframe>
+    <iframe src="./pages/homepage/homepage.html" frameborder="0"></iframe>
+</div>
+
+<div class="master_play">
+    <div class="wave">
+        <div class="wave1"></div>
+        <div class="wave1"></div>
+        <div class="wave1"></div>
     </div>
-
-    <div class="master_play">
-        <div class="wave">
-            <div class="wave1"></div>
-            <div class="wave1"></div>
-            <div class="wave1"></div>
-        </div>
-        <img src="img/26th.jpg" alt="Alan" id="poster_master_play">
-        <h5 id="title">Vande Mataram<br>
-            <div class="subtitle">Bankim Chandra</div>
-        </h5>
-        <div class="icon">
-            <i class="bi bi-skip-start-fill" id="back"></i>
-            <i class="bi bi-play-fill" id="masterPlay"></i>
-            <i class="bi bi-skip-end-fill" id="next"></i>
-        </div>
-        <span id="currentStart">0:00</span>
-        <div class="bar">
-            <input type="range" id="seek" min="0" value="0" max="100">
-            <div class="bar2" id="bar2"></div>
-            <div class="dot"></div>
-        </div>
-        <span id="currentEnd">0:00</span>
-
-        <div class="vol">
-            <i class="bi bi-volume-up-fill" id="vol_icon"></i>
-            <input type="range" id="vol" min="0" value="30" max="100">
-            <div class="vol_bar"></div>
-            <div class="dot" id="vol_dot"></div>
-        </div>
+    <img src="img/26th.jpg" alt="Alan" id="poster_master_play">
+    <h5 id="title">Vande Mataram<br>
+        <div class="subtitle">Bankim Chandra</div>
+    </h5>
+    <div class="icon">
+        <i class="bi bi-skip-start-fill" id="back"></i>
+        <i class="bi bi-play-fill" id="masterPlay"></i>
+        <i class="bi bi-skip-end-fill" id="next"></i>
     </div>
-
-    <div class="nav_bar">
-        <i class="bi bi-house-fill" onclick="navTo('homepage'); setSectionTitle('Homepage')"></i>
-        <i class="bi bi-journal-album" onclick="navTo('my-library'); setSectionTitle('My Library')"></i>
-        <i class="bi bi-music-note-list" onclick="navTo('lyrics'); setSectionTitle('Lyrics Search')"></i>
-        <i class="bi bi-heart-fill" onclick="displayLikedSongs(); setSectionTitle('Liked Songs')"></i>
+    <span id="currentStart">0:00</span>
+    <div class="bar">
+        <input type="range" id="seek" min="0" value="0" max="100">
+        <div class="bar2" id="bar2"></div>
+        <div class="dot"></div>
     </div>
-</header>
+    <span id="currentEnd">0:00</span>
+
+    <div class="vol">
+        <i class="bi bi-volume-up-fill" id="vol_icon"></i>
+        <input type="range" id="vol" min="0" value="30" max="100">
+        <div class="vol_bar"></div>
+        <div class="dot" id="vol_dot"></div>
+    </div>
+</div>
+
+<div class="nav_bar">
+    <i class="bi bi-house-fill" onclick="navTo('homepage'); setSectionTitle('Homepage')"></i>
+    <i class="bi bi-journal-album" onclick="navTo('my-library'); setSectionTitle('My Library')"></i>
+    <i class="bi bi-music-note-list" onclick="navTo('lyrics'); setSectionTitle('Lyrics Search')"></i>
+    <i class="bi bi-heart-fill" onclick="displayLikedSongs(); setSectionTitle('Liked Songs')"></i>
+</div>
 
 <script src="script.js" type="module"></script>
 
