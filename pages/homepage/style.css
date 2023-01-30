@@ -24,15 +24,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
- }
- .section_header .bi{
+}
+.section_header .bi{
     color: #a4a8b4;
     cursor: pointer;
     transition: .3s linear;
- }
- .section_header .bi:hover{
+}
+.section_header .bi:hover{
     color: #fff;
- }
+}
+
+.scrolling_grid {
+    display: grid !important;
+    grid-template-columns: repeat(10, minmax(150px, 1fr));
+    grid-template-rows: 1fr 1fr;
+}
+
 .list_container {
     width: 100%;
     height: auto;
@@ -50,7 +57,7 @@
 }
 .content_card{
     cursor: pointer;
-    min-width: 200px;
+    width: 200px;
     height: auto;
     list-style-type: none;
     margin-right: 10px;
@@ -64,9 +71,10 @@
     height: 200px;
 }
 .card_info {
-  padding: 5px 0px 0px 5px;
+    padding: 5px 0px 0px 5px;
 }
 .card_title{
+    color: #b6b6b6;
   line-height: 15px;
   font-size: 15px;
   margin-bottom: 2px;
@@ -83,4 +91,32 @@
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.small_cards .content_card {
+    width: 140px;
+    height: 190px;
+}
+
+.small_cards .content_card .card_title {
+    font-size: 13px;
+}
+
+.small_cards .content_card img {
+    width: 140px;
+    height: 140px;
+}
+
+.large_cards .content_card {
+    width: 250px;
+    height: 250px;
+}
+
+.large_cards .content_card .card_title {
+    display: none;
+}
+
+.large_cards .content_card img {
+    width: 250px;
+    height: 250px;
 }
