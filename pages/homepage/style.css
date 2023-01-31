@@ -11,7 +11,6 @@
     margin: auto;
     width: 100vw;
     height: auto;
-    padding-bottom: 8em;
  }
 .section_container {
     width: 90%;
@@ -69,9 +68,8 @@
 .content_card img{
     width: 200px;
     height: 200px;
-}
-.card_info {
-    padding: 5px 0px 0px 5px;
+    border: 0;
+    border-radius: 5px;
 }
 .card_title{
     color: #b6b6b6;
