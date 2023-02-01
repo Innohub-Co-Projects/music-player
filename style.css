@@ -519,6 +519,25 @@ iframe {
     display: none;
 }
 
+.nav_dropup_container .nav_dropup {
+    position: absolute;
+    width: 70%;
+    right: 0;
+    bottom: 8%;
+    padding: 15px;
+    gap: 10px;
+    font-size: 18px;
+    text-decoration: underline;
+    flex-direction: column-reverse;
+    background-color: #111727;
+    border: 1px solid #333;
+    display: none;
+}
+
+.nav_dropup_container .nav_dropup[data-state="active"] {
+    display: flex;
+}
+
 
 @media screen and (max-width:600px) {
     .nav_bar {

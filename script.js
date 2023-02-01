@@ -300,3 +300,31 @@ document.querySelectorAll('.lang_dropup span').forEach(lang_button => {
         }
     })
 })
+
+// nav bar dropup stuff:
+
+let more_button = document.querySelector('#more_button')
+
+more_button.addEventListener('click', () => {
+    let dropup_container = document.querySelector('.nav_dropup_container')
+    let nav_dropup = dropup_container.querySelector('.nav_dropup')
+
+    if (nav_dropup.dataset.state == 'active') {
+        nav_dropup.dataset.state = 'inactive'
+    }
+    else {
+        nav_dropup.dataset.state = 'active'
+    }
+})
+
+function closeMoreMenuOnClick(event) {
+    let dropup_container = document.querySelector('.nav_dropup_container')
+    let nav_dropup = dropup_container.querySelector('.nav_dropup')
+
+    if (dropup_container.contains(event.target)) { return }
+
+    nav_dropup.dataset.state = 'closed'
+}
+
+document.addEventListener('click', closeMoreMenuOnClick)
+iframe.contentWindow.addEventListener('click', closeMoreMenuOnClick)
