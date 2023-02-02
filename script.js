@@ -205,14 +205,16 @@ window.displayLikedSongs = displayLikedSongs
 // language code:
 
 function toggleLangDropup() {
-    let dropup = document.querySelector('.lang_dropup')
+    let dropups = document.querySelectorAll('.lang_dropup')
 
-    if (dropup.dataset.state == 'open') {
-        dropup.dataset.state = 'closed';
-    }
-    else {
-        dropup.dataset.state = 'open';
-    }
+    dropups.forEach(dropup => {
+        if (dropup.dataset.state == 'open') {
+            dropup.dataset.state = 'closed';
+        }
+        else {
+            dropup.dataset.state = 'open';
+        }
+    })
 }
 
 function closeDropupOnClick(event) {
@@ -328,3 +330,22 @@ function closeMoreMenuOnClick(event) {
 
 document.addEventListener('click', closeMoreMenuOnClick)
 iframe.contentWindow.addEventListener('click', closeMoreMenuOnClick)
+
+// nav bar more options menu lang dropup stuff?
+
+let lang_button = document.querySelector('#lang_select')
+
+lang_button.addEventListener('click', toggleLangDropup)
+
+function closeNavLangDropupOnClick(event) {
+    let dropup = document.querySelector('.nav_dropup .lang_dropup')
+    let button = document.querySelector('#lang_select')
+
+    if (button.contains(event.target)) { return }
+    if (dropup.contains(event.target)) { return }
+
+    dropup.dataset.state = 'closed'
+}
+
+document.addEventListener('click', closeNavLangDropupOnClick)
+iframe.contentWindow.addEventListener('click', closeNavLangDropupOnClick)
