@@ -169,7 +169,6 @@
 }
 
 .main_container .popular_song .pop_song {
-    width: 140px;
     min-width: 140px;
     height: 180px;
     margin-top: 15px;
@@ -181,7 +180,7 @@
     display: none;
 }
 .main_container .popular_song .pop_song li{
-    min-width: 100px;
+    min-width: 140px;
     height: 140px;
     list-style-type: none;
     margin-right: 10px;
