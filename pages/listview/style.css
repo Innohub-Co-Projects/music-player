@@ -115,6 +115,7 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: fit-content;
 }
 
 .list_item #album:hover {
