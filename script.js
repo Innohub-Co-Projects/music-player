@@ -46,7 +46,7 @@ document.querySelectorAll('.menu_item').forEach(menu_item => {
 
 // Player functions:
 
-var music = new Audio('./vande.mp3');
+var music = new Audio('./assets/rickroll.mp3');
 let masterPlay = document.getElementById('masterPlay');
 let wave = document.getElementsByClassName('wave')[0];
 
