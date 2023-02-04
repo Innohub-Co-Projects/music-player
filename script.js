@@ -46,9 +46,12 @@ document.querySelectorAll('.menu_item').forEach(menu_item => {
 
 // Player functions:
 
-var music = new Audio('./assets/rickroll.mp3');
+var music = new Audio();
 let masterPlay = document.getElementById('masterPlay');
 let wave = document.getElementsByClassName('wave')[0];
+
+// set initial song
+playAudio('./assets/rickroll.mp3', 'Never Gonna Give You Up', 'Rick Astley', './assets/rickroll.jpg')
 
 function playAudio(audio_src, audio_title, audio_subtitle, thumbnail_img) {
     music.src = audio_src;
