@@ -5,17 +5,12 @@
 function getLikedSongIDs() {
     let id_str = window.localStorage.liked_song_ids;
 
-    if (id_str == undefined) { return undefined };
+    if (id_str == undefined) { return ['e0kCEwoC'] };
 
     return JSON.parse(window.localStorage.liked_song_ids);
 }
 
 function addLikedSongID(song_api_id) {
-    if (getLikedSongIDs() == undefined) {
-        window.localStorage.liked_song_ids = JSON.stringify([song_api_id]);
-        return;
-    }
-
     let id_arr = getLikedSongIDs();
     id_arr.push(song_api_id);
 
