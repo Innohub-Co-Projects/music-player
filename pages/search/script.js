@@ -1,0 +1,1 @@
+import { fetchSearchResults } from '../../modules/api-requests.js';
