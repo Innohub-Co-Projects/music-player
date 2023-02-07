@@ -46,4 +46,11 @@ async function fetchAlbumDetails(album_id) {
     return await fetchJSON(url);
 }
 
-export { fetchHomepage, fetchSongDetails, fetchPlaylistDetails, fetchAlbumDetails };
+async function fetchSearchResults(search_query) {
+    let url_search_query = search_query.split(' ').join('+')
+    let url = 'https://saavn.me/search/all?query=' + url_search_query
+
+    return await fetchJSON(url);
+}
+
+export { fetchHomepage, fetchSongDetails, fetchPlaylistDetails, fetchAlbumDetails, fetchSearchResults };
