@@ -17,9 +17,21 @@ function getLastPlayedSongs() {
 }
 
 // adds a song object to session storage
-function addLastPlayedSong(song_object) {
+function addLastPlayedSongByObject(song_object) {
     let songs = getLastPlayedSongs();
     songs.push(song_object);
 
     window.localStorage.last_songs = JSON.stringify(songs);
 }
+
+function addLastPlayedSong(src, title, subtitle, img) {
+    let object = {
+        src: src,
+        title: title,
+        subtitle: subtitle,
+        img: img
+    }
+    addLastPlayedSongByObject(object)
+}
+
+export { getLastPlayedSongs, addLastPlayedSongByObject, addLastPlayedSong }
