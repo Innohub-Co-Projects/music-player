@@ -158,9 +158,9 @@ async function generateFromAlbumID(album_api_id) {
 async function generateFromLikedSongs() {
     api_data.songs = await fetchLikedSongs();
 
-    let heart_img_link = 'https://upload.wikimedia.org/wikipedia/commons/3/35/Red-simple-heart-symbol-only.png';
+    let heart_img_link = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Leucanthemum_vulgare.jpeg/512px-Leucanthemum_vulgare.jpeg';
     let title = 'Liked Songs';
-    let subtitle = `${api_data.songs.length} Songs <br>Saved by you`;
+    let subtitle = `${api_data.songs.length} Songs <br>Saved by you <br>Click on the heart icons in a playlist to add more!`;
 
     updateInfoPanel(heart_img_link, title, subtitle)
 
