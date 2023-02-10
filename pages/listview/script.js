@@ -64,6 +64,7 @@ function updateInfoPanel(img_src, title, subtitle) {
 
 import { fetchPlaylistDetails, fetchAlbumDetails } from '../../modules/api-requests.js'
 import { addLikedSongID, fetchLikedSongs } from '../../modules/like-songs.js'
+import { addLastPlayedSongObject, getLastPlayedSongs } from '../../modules/last-played.js'
 
 function compactFormat(num) {
     let formatter = Intl.NumberFormat('en', { notation: 'compact' });
@@ -166,12 +167,26 @@ async function generateFromLikedSongs() {
     generateListItems(api_data)
 }
 
+async function generateFromLastPlayed() {
+    api_data.songs = await getLastPlayedSongs();
+
+    let img_link = 'https://upload.wikimedia.org/wikipedia/commons/6/64/Boettadresslapp_Jean_Fredman.jpg';
+    let title = 'Last Played';
+    let subtitle = `${api_data.songs.length} Songs <br>Played by you in this session`;
+
+    updateInfoPanel(img_link, title, subtitle);
+
+    generateListItems(api_data);
+}
+
 window.generateFromAlbumID = generateFromAlbumID;
 window.generateFromPlaylistID = generateFromPlaylistID
 window.generateFromLikedSongs = generateFromLikedSongs
+window.generateFromLastPlayed = generateFromLastPlayed
 
 function playSongByIndex(list_item_index) {
     let song = api_data.songs[list_item_index]
 
+    addLastPlayedSongObject(song)
     parent.playAudio(song.downloadUrl[2].link, song.name, song.primaryArtists, song.image[0].link)
 }

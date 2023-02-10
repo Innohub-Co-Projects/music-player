@@ -111,9 +111,12 @@ homepageInfo.trending.albums.forEach(albums => {
     addTrendingAlbums(albums.id, albums.type, albums.name, '', albums.image[1].link)
 })
 
+import { addLastPlayedSongObject } from '../../modules/last-played.js'
+
 async function playSongByID(song_api_id) {
     let song_data = (await fetchSongDetails(song_api_id))[0]
 
+    addLastPlayedSongObject(song_data)
     parent.playAudio(song_data.downloadUrl[2].link, song_data.name, song_data.primaryArtists, song_data.image[0].link)
 }
 
