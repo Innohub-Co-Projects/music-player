@@ -204,6 +204,19 @@ function displayLikedSongs() {
 }
 window.displayLikedSongs = displayLikedSongs
 
+function generateLastPlayedOnLoad() {
+    let iframe_functions = iframe.contentWindow
+    iframe_functions.generateFromLastPlayed()
+
+    iframe.removeEventListener('load', generateLastPlayedOnLoad)
+}
+
+function displayLastPlayed() {
+    iframe.addEventListener('load', generateLastPlayedOnLoad)
+    iframe.src = './pages/listview/listview.html'
+}
+window.displayLastPlayed = displayLastPlayed
+
 // language code:
 
 function toggleLangDropup() {
