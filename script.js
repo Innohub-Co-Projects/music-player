@@ -45,9 +45,6 @@ document.querySelectorAll('.menu_item').forEach(menu_item => {
 })
 
 // Player functions:
-
-import { addLastPlayedSong } from './modules/last-played.js'
-
 var music = new Audio();
 let masterPlay = document.getElementById('masterPlay');
 let wave = document.getElementsByClassName('wave')[0];
@@ -64,8 +61,6 @@ function playAudio(audio_src, audio_title, audio_subtitle, thumbnail_img) {
 
     let thumbnail = document.getElementById('poster_master_play');
     thumbnail.src = thumbnail_img;
-
-    addLastPlayedSong(audio_src, audio_title, audio_subtitle, thumbnail_img)
 }
 window.playAudio = playAudio
 
