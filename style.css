@@ -41,6 +41,7 @@ body {
 .menu_side {
     display: flex;
     flex-direction: column;
+    min-width: 11em;
 }
 
 .menu_side h1 {
