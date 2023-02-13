@@ -34,9 +34,9 @@
 
     <div class="lang_indicator">
         <span>Lang: English</span>
-        <div class="lang_dropup">
-            <span data-state="active">hindi</span>
-            <span data-state="active">english</span>
+        <div class="lang_dropup" id="dropup">
+            <span>hindi</span>
+            <span>english</span>
             <span>punjabi</span>
             <span>tamil</span>
             <span>telugu</span>
@@ -110,28 +110,30 @@
     <i class="bi bi-music-note-list" onclick="navTo('lyrics'); setSectionTitle('Lyrics Search')"></i>
     <div class="nav_dropup_container">
         <i id="more_button" class="bi bi-list"></i>
-        <div class="nav_dropup">
+        <div class="nav_dropup" id="dropup">
             <span onclick="displayLikedSongs()">Liked Songs</span>
             <span onclick="displayLastPlayed()">Last Played</span>
             <span>About</span>
-            <span id="lang_select">Language Select</span>
-            <div class="lang_dropup">
-                <span data-state="active">hindi</span>
-                <span data-state="active">english</span>
-                <span>punjabi</span>
-                <span>tamil</span>
-                <span>telugu</span>
-                <span>marathi</span>
-                <span>gujarati</span>
-                <span>bengali</span>
-                <span>kannada</span>
-                <span>bhojpuri</span>
-                <span>malayalam</span>
-                <span>urdu</span>
-                <span>haryanvi</span>
-                <span>rajasthani</span>
-                <span>odia</span>
-                <span>assamese</span>
+            <div>
+                <span id="lang_select">Language Select</span>
+                <div class="lang_dropup" id="dropup">
+                    <span>hindi</span>
+                    <span>english</span>
+                    <span>punjabi</span>
+                    <span>tamil</span>
+                    <span>telugu</span>
+                    <span>marathi</span>
+                    <span>gujarati</span>
+                    <span>bengali</span>
+                    <span>kannada</span>
+                    <span>bhojpuri</span>
+                    <span>malayalam</span>
+                    <span>urdu</span>
+                    <span>haryanvi</span>
+                    <span>rajasthani</span>
+                    <span>odia</span>
+                    <span>assamese</span>
+                </div>
             </div>
         </div>
     </div>

@@ -232,21 +232,8 @@ function toggleLangDropup() {
     })
 }
 
-function closeDropupOnClick(event) {
-    let lang_elements = document.querySelector('.lang_indicator')
-    let dropup = document.querySelector('.lang_dropup')
-
-    if (lang_elements.contains(event.target)) { return }
-
-    dropup.dataset.state = 'closed'
-}
-
 // toggle dropup when lang indicator is clicked
 document.querySelector('.lang_indicator span').addEventListener('click', toggleLangDropup)
-
-// close dropup when clicked outside of dropup
-document.addEventListener('click', closeDropupOnClick)
-iframe.contentWindow.addEventListener('click', closeDropupOnClick)
 
 import { addLanguage, removeLanguage, getLanguageArray } from './modules/language.js'
 
@@ -334,33 +321,38 @@ more_button.addEventListener('click', () => {
     }
 })
 
-function closeMoreMenuOnClick(event) {
-    let dropup_container = document.querySelector('.nav_dropup_container')
-    let nav_dropup = dropup_container.querySelector('.nav_dropup')
-
-    if (dropup_container.contains(event.target)) { return }
-
-    nav_dropup.dataset.state = 'closed'
-}
-
-document.addEventListener('click', closeMoreMenuOnClick)
-iframe.contentWindow.addEventListener('click', closeMoreMenuOnClick)
-
 // nav bar more options menu lang dropup stuff?
 
 let lang_button = document.querySelector('#lang_select')
 
 lang_button.addEventListener('click', toggleLangDropup)
 
-function closeNavLangDropupOnClick(event) {
-    let dropup = document.querySelector('.nav_dropup .lang_dropup')
-    let button = document.querySelector('#lang_select')
+// dropup close events:
 
-    if (button.contains(event.target)) { return }
-    if (dropup.contains(event.target)) { return }
+// closes dropups when user clicks outside the dropup | ignores clicks in parent container
+function closeDropupOnOutsideClick(dropup_element, event) {
+    let container = dropup_element.parentElement
 
-    dropup.dataset.state = 'closed'
+    if (container.contains(event.target)) { return }
+
+    dropup_element.dataset.state = 'closed'
 }
 
-document.addEventListener('click', closeNavLangDropupOnClick)
-iframe.contentWindow.addEventListener('click', closeNavLangDropupOnClick)
+// add click and mobile touch events for dropups
+document.querySelectorAll('#dropup').forEach(dropup => {
+    document.addEventListener('click', (event) => {
+        closeDropupOnOutsideClick(dropup, event)
+    })
+    document.addEventListener('touchstart', (event) => {
+        closeDropupOnOutsideClick(dropup, event)
+    })
+
+    iframe.addEventListener('load', () => {
+        iframe.contentWindow.addEventListener('click', (event) => {
+            closeDropupOnOutsideClick(dropup, event)
+        })
+        iframe.contentWindow.addEventListener('touchstart', (event) => {
+            closeDropupOnOutsideClick(dropup, event)
+        })
+    })
+})
