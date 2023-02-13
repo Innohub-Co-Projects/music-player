@@ -241,19 +241,6 @@ import { addLanguage, removeLanguage, getLanguageArray } from './modules/languag
 setSelectedLanguages(getLanguageArray())
 updateLangIndicator()
 
-// get selected language options in dropup menu
-function getSelectedLanguages() {
-    let languages = [];
-
-    document.querySelectorAll('.lang_dropup span').forEach(lang_button => {
-        if (lang_button.dataset.state == 'active') {
-            languages.push(lang_button.textContent)
-        }
-    })
-
-    return languages;
-}
-
 // set active options in dropup menu
 function setSelectedLanguages(lang_arr) {
     document.querySelectorAll('.lang_dropup span').forEach(lang_button => {
@@ -268,8 +255,7 @@ function setSelectedLanguages(lang_arr) {
 
 function updateLangIndicator() {
     let lang_indicator = document.querySelector('.lang_indicator span')
-    let languages = getSelectedLanguages()
-
+    let languages = getLanguageArray()
     if (languages.length == 0) {
         lang_indicator.textContent = 'Lang: default'
     }
