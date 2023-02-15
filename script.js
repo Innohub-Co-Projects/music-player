@@ -211,6 +211,24 @@ function generateLastPlayedOnLoad() {
     iframe.removeEventListener('load', generateLastPlayedOnLoad)
 }
 
+function searchFor(search_query) {
+    iframe.addEventListener('load', () => {
+        let iframe_functions = iframe.contentWindow
+        iframe_functions.generateSearch(search_query)
+    }, {once: true})
+
+    navTo('search')
+}
+
+function searchSubmitEvent(event) {
+    event.preventDefault()
+    let text_input = event.target.querySelector('input[type="text"]')
+    searchFor(text_input.value)
+    text_input.value = ''
+}
+let form_element = document.querySelector('#search_form')
+form_element.addEventListener('submit', searchSubmitEvent)
+
 function displayLastPlayed() {
     iframe.addEventListener('load', generateLastPlayedOnLoad)
     iframe.src = './pages/listview/listview.html'

@@ -1,6 +1,6 @@
 import { fetchSearchResults } from "../../modules/api-requests.js";
 
-async function generate(search_query) {
+async function generateSearch(search_query) {
     let query_header = document.querySelector("#search_query");
     query_header.textContent = search_query;
 
@@ -9,6 +9,7 @@ async function generate(search_query) {
     appendAlbumContainer(search_data);
     appendPlaylistContainer(search_data);
 }
+window.generateSearch = generateSearch;
 
 function appendSongContainer(search_data) {
     if (search_data.songs.results.length == 0) { return; }
