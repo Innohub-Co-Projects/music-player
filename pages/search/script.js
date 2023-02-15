@@ -6,13 +6,12 @@ async function generate(search_query) {
 
     let search_data = await fetchSearchResults(search_query);
     appendSongContainer(search_data);
+    appendAlbumContainer(search_data);
     appendPlaylistContainer(search_data);
 }
 
 function appendSongContainer(search_data) {
-    if (search_data.songs.results.length == 0) {
-        return;
-    }
+    if (search_data.songs.results.length == 0) { return; }
 
     let section = createSectionElement("Songs", "list");
 
@@ -29,9 +28,7 @@ function appendSongContainer(search_data) {
 }
 
 function appendPlaylistContainer(search_data) {
-    if (search_data.playlists.results.length == 0) {
-        return;
-    }
+    if (search_data.playlists.results.length == 0) { return; }
 
     let section = createSectionElement("Playlists", "cards");
 
@@ -40,6 +37,24 @@ function appendPlaylistContainer(search_data) {
         let card = createContentCard(playlist.id, "playlist", playlist.title, "", playlist.image[2].link);
         cards.push(card);
     });
+
+    let content_container = section.querySelector(".content_container");
+    content_container.replaceChildren(...cards);
+
+    let main_container = document.querySelector(".main_container");
+    main_container.appendChild(section);
+}
+
+function appendAlbumContainer(search_data) {
+    if (search_data.albums.results.length == 0) { return; }
+
+    let section = createSectionElement("Albums", "cards");
+
+    let cards = [];
+    search_data.albums.results.forEach((album) => {
+        let card = createContentCard(album.id, "album", album.title, album.description, album.image[2].link);
+        cards.push(card);
+    })
 
     let content_container = section.querySelector(".content_container");
     content_container.replaceChildren(...cards);
