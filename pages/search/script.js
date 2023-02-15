@@ -6,10 +6,13 @@ async function generate(search_query) {
 
     let search_data = await fetchSearchResults(search_query);
     appendSongContainer(search_data);
+    appendPlaylistContainer(search_data);
 }
 
 function appendSongContainer(search_data) {
-    if (search_data.songs.results.length == 0) { return; }
+    if (search_data.songs.results.length == 0) {
+        return;
+    }
 
     let section = createSectionElement("Songs", "list");
 
@@ -18,11 +21,31 @@ function appendSongContainer(search_data) {
         list_items.push(createListItem(song));
     });
 
-    let content_container = section.querySelector('.content_container')
-    content_container.replaceChildren(...list_items)
+    let content_container = section.querySelector(".content_container");
+    content_container.replaceChildren(...list_items);
 
-    let main_container = document.querySelector('.main_container')
-    main_container.appendChild(section)
+    let main_container = document.querySelector(".main_container");
+    main_container.appendChild(section);
+}
+
+function appendPlaylistContainer(search_data) {
+    if (search_data.playlists.results.length == 0) {
+        return;
+    }
+
+    let section = createSectionElement("Playlists", "cards");
+
+    let cards = [];
+    search_data.playlists.results.forEach((playlist) => {
+        let card = createContentCard(playlist.id, "playlist", playlist.title, "", playlist.image[2].link);
+        cards.push(card);
+    });
+
+    let content_container = section.querySelector(".content_container");
+    content_container.replaceChildren(...cards);
+
+    let main_container = document.querySelector(".main_container");
+    main_container.appendChild(section);
 }
 
 function createSectionElement(title, content_type) {
@@ -33,8 +56,8 @@ function createSectionElement(title, content_type) {
     section.appendChild(heading);
 
     let content_container = document.createElement("div");
-    content_container.classList.add('content_container')
-    content_container.type = content_type;
+    content_container.classList.add('content_container');
+    content_container.setAttribute('type', content_type);
     section.appendChild(content_container);
 
     return section;
@@ -94,3 +117,30 @@ function createListItem(song_object) {
 
     return list_item;
 }
+
+//
+// content card generation copied from homepage
+//
+
+function createCardInfoElement(title_text, subtitle_text) {
+    let info = newElement('div', { class: 'card_info' })
+    let title = newElement('h5', { class: 'card_title' }, title_text)
+    let subtitle = newElement('div', { class: 'card_subtitle' }, subtitle_text)
+
+    info.appendChild(title)
+    info.appendChild(subtitle)
+    return info
+}
+
+function createContentCard(api_id, content_type, title, subtitle, img_src) {
+    let card = newElement('li', { class: 'content_card', 'data-api-id': api_id, 'data-type': content_type })
+    let img = newElement('img', { src: img_src })
+    let card_info = createCardInfoElement(title, subtitle)
+
+    card.appendChild(img)
+    card.appendChild(card_info)
+    return card
+}
+
+// Way too much DOM element generation in this script,
+// some actual framework like react would probably help a lot in this case
