@@ -5,7 +5,9 @@
    margin: 0%;
    box-sizing: border-box;
 }
-
+html::-webkit-scrollbar { 
+   display: none;
+}
 .main_container {
     z-index: 2;
     color: #fff;
