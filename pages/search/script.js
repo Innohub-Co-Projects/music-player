@@ -1,4 +1,6 @@
-import { fetchSearchResults } from "../../modules/api-requests.js";
+import { fetchSearchResults, fetchSongDetails } from "../../modules/api-requests.js";
+import { addLikedSongID } from "../../modules/like-songs.js";
+import { addLastPlayedSongObject } from '../../modules/last-played.js'
 
 async function generateSearch(search_query) {
     let query_header = document.querySelector("#search_query");
@@ -8,6 +10,9 @@ async function generateSearch(search_query) {
     appendSongContainer(search_data);
     appendAlbumContainer(search_data);
     appendPlaylistContainer(search_data);
+
+    addListItemClickEvents();
+    addCardEvents();
 }
 window.generateSearch = generateSearch;
 
@@ -134,6 +139,28 @@ function createListItem(song_object) {
     return list_item;
 }
 
+function addLikeButtonListener(list_item) {
+    let like_button = list_item.querySelector("#like_button");
+    let song_api_id = list_item.dataset.apiId;
+
+    like_button.addEventListener("click", (event) => {
+        event.stopPropagation(); // don't trigger parent click events
+        addLikedSongID(song_api_id);
+        like_button.style.color = "#d00";
+    });
+}
+
+function addListItemClickEvents() {
+    document.querySelectorAll(".list_item").forEach((list_item) => {
+        list_item.addEventListener("click", (e) => {
+            let item_id = list_item.dataset.apiId;
+            playSongByID(item_id);
+        });
+
+        addLikeButtonListener(list_item);
+    });
+}
+
 //
 // content card generation copied from homepage
 //
@@ -156,6 +183,22 @@ function createContentCard(api_id, content_type, title, subtitle, img_src) {
     card.appendChild(img)
     card.appendChild(card_info)
     return card
+}
+
+
+async function playSongByID(song_api_id) {
+    let song_data = (await fetchSongDetails(song_api_id))[0];
+
+    addLastPlayedSongObject(song_data);
+    parent.playAudio(song_data.downloadUrl[2].link, song_data.name, song_data.primaryArtists, song_data.image[0].link);
+}
+
+function addCardEvents() {
+    document.querySelectorAll('.content_card').forEach(card => {
+        card.addEventListener('click', () => {
+            parent.displayListView(card.dataset.type, card.dataset.apiId);
+        })
+    })
 }
 
 // Way too much DOM element generation in this script,
