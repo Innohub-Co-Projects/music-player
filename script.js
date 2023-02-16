@@ -164,57 +164,37 @@ next.addEventListener('click', ()=>{
 
 // list view stuff:
 
-function generateListOnLoad(e) {
-    let frame_functions = iframe.contentWindow
-    if (e.target.type == 'playlist') {
-        frame_functions.generateFromPlaylistID(e.target.api_id);
-    }
-    else if (e.target.type == 'album') {
-        frame_functions.generateFromAlbumID(e.target.api_id);
-    }
-    else {
-        console.error('Invalid list view type: ' + e.target.type);
-        return;
-    }
-
-    iframe.removeEventListener('load', generateListOnLoad)
-    delete iframe.type
-    delete iframe.api_id
-}
-
 function displayListView(type, api_id) {
-    iframe.type = type;
-    iframe.api_id = api_id;
-    iframe.addEventListener('load', generateListOnLoad)
+    iframe.addEventListener('load', () => {
+        let frame_functions = iframe.contentWindow
+        if (type == 'playlist') {
+            frame_functions.generateFromPlaylistID(api_id);
+        }
+        else if (type == 'album') {
+            frame_functions.generateFromAlbumID(api_id);
+        }
+        else {
+            console.error('Invalid list view type: ' + type);
+        }
+    }, {once: true})
 
     iframe.src = './pages/listview/listview.html';
 }
 window.displayListView = displayListView
 
-function generateLikedSongsOnLoad() {
-    let iframe_functions = iframe.contentWindow
-    iframe_functions.generateFromLikedSongs()
-
-    iframe.removeEventListener('load', generateLikedSongsOnLoad)
-}
-
 function displayLikedSongs() {
-    iframe.addEventListener('load', generateLikedSongsOnLoad)
+    iframe.addEventListener('load', () => {
+        iframe.contentWindow.generateFromLikedSongs()
+    }, {once: true})
+
     iframe.src = './pages/listview/listview.html'
 }
 window.displayLikedSongs = displayLikedSongs
 
-function generateLastPlayedOnLoad() {
-    let iframe_functions = iframe.contentWindow
-    iframe_functions.generateFromLastPlayed()
-
-    iframe.removeEventListener('load', generateLastPlayedOnLoad)
-}
-
 function searchFor(search_query) {
     iframe.addEventListener('load', () => {
         let iframe_functions = iframe.contentWindow
-        iframe_functions.generateSearch(search_query)
+        iframe_functions.generateSearch(search_query)// FIX SEMICOLONS
     }, {once: true})
 
     navTo('search')
@@ -230,7 +210,10 @@ let form_element = document.querySelector('#search_form')
 form_element.addEventListener('submit', searchSubmitEvent)
 
 function displayLastPlayed() {
-    iframe.addEventListener('load', generateLastPlayedOnLoad)
+    iframe.addEventListener('load', () => {
+        iframe.contentWindow.generateFromLastPlayed()
+    }, {once: true})
+
     iframe.src = './pages/listview/listview.html'
 }
 window.displayLastPlayed = displayLastPlayed
