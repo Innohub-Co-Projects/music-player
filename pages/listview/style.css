@@ -111,6 +111,7 @@ body {
 
 .list_item img {
     height: 100%;
+    aspect-ratio: 1;
     width: auto;
 }
 
