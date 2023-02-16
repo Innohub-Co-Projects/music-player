@@ -260,7 +260,6 @@ body {
     }
 }
 
-
 .master_play img {
     width: 35px;
     height: 35px;
@@ -494,11 +493,16 @@ body {
     padding: 3px 0px 0px 10px;
 }
 
+.song_side nav .search form {
+    width: 100%;
+}
+
 .song_side nav .search input {
+    width: 100%;
     background: none;
     outline: none;
     border: none;
-    padding: 0px 10px;
+    padding-left: 10px;
     color: #fff;
     font-size: 12px;
 }
@@ -552,7 +556,6 @@ iframe {
     bottom: 100%;
     right: 0;
 }
-
 
 @media screen and (max-width:600px) {
     .nav_bar {
