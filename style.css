@@ -315,7 +315,7 @@ body {
     position: relative;
     width: 43%;
     height: 2px;
-    background: rgb(105, 105, 170, .1);
+    background-color: rgb(105, 105, 170, .1);
     margin: 0px 15px 0px 10px;
 }
 
@@ -556,6 +556,25 @@ iframe {
     bottom: 100%;
     right: 0;
 }
+
+.hidden {
+    display: none;
+}
+
+.shimmer {
+    animation : shimmer 2s infinite;
+    background: linear-gradient(to right, #1e243c 4%, #293d67 25%, #232945 36%);
+    background-size: 1000px 100%;
+ }
+
+@keyframes shimmer {
+    0% {
+      background-position: -400px 0;
+    }
+    100% {
+      background-position: 600px 0;
+    }
+  }
 
 @media screen and (max-width:600px) {
     .nav_bar {

@@ -109,10 +109,34 @@ music.addEventListener("timeupdate", () => {
     currentStart.innerText = formatDuration(music_curr);
 
     let progressbar = parseInt((music.currentTime / music.duration) * 100);
+    if (progressbar == NaN || music.duration == undefined) { progressbar = 0; }
+
     seek.value = progressbar;
-    let seekbar = seek.value;
-    bar2.style.width = `${seekbar}%`;
-    dot.style.left = `${seekbar}%`;
+    let seekbar = progressbar;
+    bar2.style.width = `${progressbar}%`;
+    dot.style.left = `${progressbar}%`;
+});
+
+music.addEventListener("loadstart", () => {
+    let bar = document.querySelector(".bar");
+    bar.classList.add("shimmer");
+
+    seek.classList.add("hidden");
+    bar2.classList.add("hidden");
+    dot.classList.add("hidden");
+    currentStart.classList.add("hidden");
+    currentEnd.classList.add("hidden");
+});
+
+music.addEventListener("canplay", () => {
+    let bar = document.querySelector(".bar");
+    bar.classList.remove("shimmer");
+
+    seek.classList.remove("hidden");
+    bar2.classList.remove("hidden");
+    dot.classList.remove("hidden");
+    currentStart.classList.remove("hidden");
+    currentEnd.classList.remove("hidden");
 });
 
 seek.addEventListener("change", () => {
