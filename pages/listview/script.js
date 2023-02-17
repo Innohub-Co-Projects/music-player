@@ -107,7 +107,6 @@ function generateListItems(api_data) {
     api_data.songs.forEach((song, index) => {
         addNewItemToList(song, index);
     });
-    addListItemClickEvents();
 }
 
 var api_data = {};
@@ -166,40 +165,41 @@ window.generateFromLikedSongs = generateFromLikedSongs;
 window.generateFromLastPlayed = generateFromLastPlayed;
 
 // setup list item event listeners:
+// event delegation here allows you to add events to the list container instead of individual list items
 
-function addLikeButtonListener(list_item) {
-    let like_button = list_item.querySelector("#like_button");
+let list = document.querySelector('.list')
+
+// like button event listener using event delegation
+list.addEventListener('click', (event) => {
+    let like_button = event.target.closest('#like_button');
+    if (!like_button) return;
+
+    let list_item = like_button.closest('.list_item');
     let song_api_id = list_item.dataset.apiId;
 
-    like_button.addEventListener("click", (event) => {
-        event.stopPropagation(); // don't trigger parent click events
-        addLikedSongID(song_api_id);
-        like_button.style.color = "#d00";
-    });
-}
+    addLikedSongID(song_api_id);
+    like_button.style.color = "#d00";
+})
 
-// go to album page by clicking the album name
-function addAlbumListener(list_item) {
-    let album_element = list_item.querySelector("#album");
+// album event listener using event delegation
+list.addEventListener('click', (event) => {
+    let album_element = event.target.closest('#album');
+    if (!album_element) return;
 
-    album_element.addEventListener("click", (event) => {
-        event.stopPropagation(); // don't trigger parent click events
-        let album_id = album_element.dataset.apiId;
-        parent.displayListView("album", album_id);
-    });
-}
+    let album_id = album_element.dataset.apiId;
+    parent.displayListView("album", album_id);
+})
 
-function addListItemClickEvents() {
-    document.querySelectorAll(".list_item").forEach((list_item) => {
-        list_item.addEventListener("click", (e) => {
-            let item_index = list_item.dataset.index;
-            playSongByIndex(item_index);
-        });
+// list item play event listener using event delegation
+list.addEventListener('click', (event) => {
+    if (event.target.id == 'like_button' || event.target.id == '#album') return;
 
-        addLikeButtonListener(list_item);
-        addAlbumListener(list_item);
-    });
-}
+    let list_item = event.target.closest('.list_item');
+    if (!list_item) return;
+
+    let item_index = list_item.dataset.index;
+        playSongByIndex(item_index);
+})
 
 var current_index = -1;
 
