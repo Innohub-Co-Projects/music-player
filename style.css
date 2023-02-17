@@ -87,6 +87,10 @@ body {
     margin-right: 5% !important;
 }
 
+.menu_side a {
+    text-decoration: none;
+}
+
 .menu_side .menu h4 {
     font-size: 14px;
     font-weight: 400;
