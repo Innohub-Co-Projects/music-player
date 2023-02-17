@@ -285,8 +285,8 @@ html::-webkit-scrollbar {
 .main_container .popular_artists .item li {
    list-style-type: none;
    position: relative;
-   min-width: 60px;
-   height: 60px;
+   min-width: 110px;
+   height: 110px;
    border-radius: 50%;
    margin-right: 20px;
    cursor: pointer;
