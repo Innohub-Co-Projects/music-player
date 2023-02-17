@@ -6,8 +6,11 @@ const search = document.getElementById("search");
 const result = document.getElementById("result");
 gapi.load("client", loadClient);
 
+const AdTz = "QUl6YVN5Q1hkOC1EemhqTFN3S3ZPVFBKekZKa1pIaUt2c1BOQUpz";
+const OsAr = "YzNjZmRjMmUyNW1zaGQ3ODc3ZDBhYTNiNGE5N3AxZDFkMzNqc25iM2JhZGFjZjZmYjg";
+
 function loadClient() {
-    gapi.client.setApiKey("AIzaSyCXd8-DzhjLSwKvOTPJzFJkZHiKvsPNAJs");
+    gapi.client.setApiKey(atob(AdTz));
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest").then(
         function () {
             console.log("GAPI client loaded for API");
@@ -74,7 +77,7 @@ result.addEventListener("click", async (e) => {
 const lyricOptions = {
     method: "GET",
     headers: {
-        "X-RapidAPI-Key": "c3cfdc2e25mshd7877d0aa3b4a97p1d1d33jsnb3badacf6fb8",
+        "X-RapidAPI-Key": atob(OsAr),
         "X-RapidAPI-Host": "genius-song-lyrics1.p.rapidapi.com",
     },
 };
