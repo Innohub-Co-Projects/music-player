@@ -25,8 +25,7 @@
 
 .video {
     width: auto;
-    margin-left: 5px; /* add a 5px margin to each side of the video */
-    margin-right: 5px; /* add a 5px margin to each side of the video */
+    margin-right: 10px;
     flex-shrink: 0; /* prevent videos from shrinking below their width */
     height: 100%;
     object-fit: fill;
@@ -37,7 +36,7 @@
     flex-wrap: nowrap; /* prevent videos from wrapping to the next line */
     overflow-x: scroll; /* add horizontal scrolling */
     width: max-content; /* make the width of the container based on the size of the videos */
-    height: 13em;
+    height: 12em;
 }
 .video-scroll::-webkit-scrollbar {
     width: 0em;
@@ -84,4 +83,10 @@
 .video-container:hover #myVideo::-webkit-media-controls-current-time-display,
 .video-container:hover #myVideo::-webkit-media-controls-time-remaining-display {
     color: #fff;
+}
+
+@media screen and (max-width:600px) {
+    .video-scroll {
+        height: 10em;
+    }
 }
