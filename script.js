@@ -344,6 +344,15 @@ lang_button.addEventListener("click", toggleLangDropup);
 
 // dropup close events:
 
+// adds event listener for main document and iframe document
+function addGlobalEventListener(event_type, callback, options) {
+    document.addEventListener(event_type, callback, options);
+
+    iframe.addEventListener("load", () => {
+        iframe.contentWindow.addEventListener(event_type, callback, options);
+    });
+}
+
 // closes dropups when user clicks outside the dropup | ignores clicks in parent container
 function closeDropupOnOutsideClick(dropup_element, event) {
     let container = dropup_element.parentElement;
@@ -355,19 +364,43 @@ function closeDropupOnOutsideClick(dropup_element, event) {
 
 // add click and mobile touch events for dropups
 document.querySelectorAll("#dropup").forEach((dropup) => {
-    document.addEventListener("click", (event) => {
+    addGlobalEventListener("click", (event) => {
         closeDropupOnOutsideClick(dropup, event);
     });
-    document.addEventListener("touchstart", (event) => {
+    addGlobalEventListener("touchstart", (event) => {
         closeDropupOnOutsideClick(dropup, event);
     });
+});
 
-    iframe.addEventListener("load", () => {
-        iframe.contentWindow.addEventListener("click", (event) => {
-            closeDropupOnOutsideClick(dropup, event);
-        });
-        iframe.contentWindow.addEventListener("touchstart", (event) => {
-            closeDropupOnOutsideClick(dropup, event);
-        });
-    });
+// Hotkey stuff
+
+function toggleMusic() {
+    if (music.paused || music.currentTime <= 0) {
+        music.play();
+    } else {
+        music.pause();
+    }
+}
+
+addGlobalEventListener("keydown", (e) => {
+    // play / pause
+    if (e.key == " " || e.key == "k") {
+        toggleMusic();
+    }
+    // seek left
+    else if (e.key == "j" || e.key == "ArrowLeft") {
+        music.currentTime -= 5;
+    }
+    // seek right
+    else if (e.key == "k" || e.key == "ArrowRight") {
+        music.currentTime += 5;
+    }
+    // previous song
+    else if (e.key == "," || e.key == "<") {
+        back.click();
+    }
+    //next song
+    else if (e.key == "." || e.key == ">") {
+        next.click();
+    }
 });
