@@ -1,3 +1,6 @@
+// Set section header/title
+parent.setSectionTitle('My Library');
+
 // ids are very important for a song object
 // they determine the img and audio src path for the song
 class Song {

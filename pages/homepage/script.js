@@ -1,3 +1,6 @@
+// Set section header/title
+parent.setSectionTitle('Homepage');
+
 let sections = document.querySelectorAll('.section_container')
 
 // scroll button events

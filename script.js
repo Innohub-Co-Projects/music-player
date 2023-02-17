@@ -42,7 +42,6 @@ window.setSectionTitle = setSectionTitle;
 document.querySelectorAll(".menu_item").forEach((menu_item) => {
     menu_item.addEventListener("click", (e) => {
         setNavElementActive(e.target);
-        setSectionTitle(e.target.textContent);
     });
 });
 

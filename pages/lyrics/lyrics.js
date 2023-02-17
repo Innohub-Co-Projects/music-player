@@ -1,3 +1,5 @@
+// Set section header/title
+parent.setSectionTitle('Lyric Search');
 
 const form = document.getElementById('form')
 const search = document.getElementById('search')
