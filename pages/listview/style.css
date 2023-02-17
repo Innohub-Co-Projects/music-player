@@ -67,6 +67,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .header_play_button {
