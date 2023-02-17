@@ -2,6 +2,9 @@ import { fetchPlaylistDetails, fetchAlbumDetails } from "../../modules/api-reque
 import { addLikedSongID, fetchLikedSongs } from "../../modules/like-songs.js";
 import { addLastPlayedSongObject, getLastPlayedSongs } from "../../modules/last-played.js";
 
+// Show back button on page load
+parent.showBackButton();
+
 // creates a new element with given parameters
 function newElement(type_str, attributes_obj, textContent = "") {
     let element = document.createElement(type_str);

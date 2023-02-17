@@ -146,6 +146,16 @@ body {
     color: #555;
 }
 
+#section_title {
+    color: #bbb;
+}
+
+.back_button {
+    font-size: 130%;
+    cursor: pointer;
+    padding-top: 2px;
+}
+
 .lang_indicator {
     margin-top: auto;
     width: 90%;

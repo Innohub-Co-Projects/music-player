@@ -2,6 +2,9 @@ import { fetchSearchResults, fetchSongDetails } from "../../modules/api-requests
 import { addLikedSongID } from "../../modules/like-songs.js";
 import { addLastPlayedSongObject } from '../../modules/last-played.js'
 
+// Show back button on page load
+parent.showBackButton();
+
 async function generateSearch(search_query) {
     let query_header = document.querySelector("#search_query");
     query_header.textContent = search_query;

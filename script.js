@@ -38,6 +38,20 @@ function setSectionTitle(title) {
 }
 window.setSectionTitle = setSectionTitle;
 
+function showBackButton() {
+    let back_button = document.createElement('div');
+    back_button.className = 'back_button';
+    back_button.addEventListener('click', () => { navTo('homepage'); });
+
+    let icon = document.createElement('i');
+    icon.className = 'bi bi-arrow-left-square';
+    back_button.appendChild(icon);
+
+    let section_title = document.querySelector("#section_title");
+    section_title.replaceChildren(back_button);
+}
+window.showBackButton = showBackButton;
+
 // set nav element as active and change title when click on a nav element
 document.querySelectorAll(".menu_item").forEach((menu_item) => {
     menu_item.addEventListener("click", (e) => {
