@@ -201,8 +201,11 @@ function addListItemClickEvents() {
     });
 }
 
+var current_index = -1;
+
 function playSongByIndex(list_item_index) {
     let song = api_data.songs[list_item_index];
+    current_index = list_item_index;
 
     addLastPlayedSongObject(song);
     parent.playAudio(
@@ -212,3 +215,23 @@ function playSongByIndex(list_item_index) {
         song.image[0].link
     );
 }
+
+function nextSong() {
+    let next_index = (current_index + 1) % (api_data.songs.length);
+
+    let song = api_data.songs[next_index];
+    song.play = () => { playSongByIndex(next_index); }
+    return song;
+}
+
+function previousSong() {
+    let prev_index = current_index - 1;
+    if (prev_index < 0) { prev_index = api_data.songs.length - 1; }
+
+    let song = api_data.songs[prev_index];
+    song.play = () => { playSongByIndex(prev_index); }
+    return song;
+}
+
+window.nextSong = nextSong;
+window.previousSong = previousSong;
