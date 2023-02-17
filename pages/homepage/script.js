@@ -114,17 +114,23 @@ async function playSongByID(song_api_id) {
     parent.playAudio(song_data.downloadUrl[2].link, song_data.name, song_data.primaryArtists, song_data.image[0].link);
 }
 
-document.querySelectorAll(".content_card").forEach((card) => {
-    card.addEventListener("click", () => {
-        if (card.dataset.type == "song") {
-            playSongByID(card.dataset.apiId);
-            return;
-        }
+function executeCardInteraction(card) {
+    if (card.dataset.type == "song") {
+        playSongByID(card.dataset.apiId);
+        return;
+    }
 
-        parent.displayListView(card.dataset.type, card.dataset.apiId);
-    });
+    parent.displayListView(card.dataset.type, card.dataset.apiId);
+}
+
+// use event delegation to handle card events
+let body = document.querySelector('body');
+body.addEventListener("click", (event) => {
+    let card = event.target.closest(".content_card");
+    if (!card) return;
+
+    executeCardInteraction(card)
 });
-
 
 // scroll button events
 let content_sections = document.querySelectorAll(".section_container");
