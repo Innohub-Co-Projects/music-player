@@ -235,3 +235,27 @@ function previousSong() {
 
 window.nextSong = nextSong;
 window.previousSong = previousSong;
+
+// shuffle button stuff:
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function clearSongList() {
+    let list = document.querySelector('.list');
+    let list_header = list.firstElementChild;
+    list.replaceChildren(list_header);
+}
+
+function shuffleSongList() {
+    shuffleArray(api_data.songs);
+    clearSongList();
+    generateListItems(api_data)
+}
+
+let shuffle_button = document.querySelector('.header_shuffle_button');
+shuffle_button.addEventListener('click', shuffleSongList);
