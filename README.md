@@ -4,7 +4,10 @@
 A javascript based music player (and more) website created as a group mini project.
 
 ## Screenshots
-To be added
+<img alt="homepage" src="https://i.imgur.com/65kcGeL.png" width="30%"> <img alt="library" src="https://i.imgur.com/KjbIJc6.png" width="30%"> <img alt="liked songs" src="https://i.imgur.com/SPV404L.png" width="30%">
+
+<img alt="search" src="https://i.imgur.com/iiGqqir.png" width="30%"> <img alt="mobile homepage" src="https://i.imgur.com/LubKe0N.png" width="30%"> <img alt="mobile list" src="https://i.imgur.com/MMyP9qM.png" width="30%">
+
 
 ## Try it yourself
 **[Click here](https://innohub-co-projects.github.io/music-player/)** to try the live version hosted on github pages.
