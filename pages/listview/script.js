@@ -236,6 +236,13 @@ function previousSong() {
 window.nextSong = nextSong;
 window.previousSong = previousSong;
 
+//Round play button
+
+let header_play_button = document.querySelector('.header_play_button');
+header_play_button.addEventListener('click',function(){
+    playSongByIndex(0)
+},false);
+
 // shuffle button stuff:
 
 function shuffleArray(array) {
@@ -259,3 +266,4 @@ function shuffleSongList() {
 
 let shuffle_button = document.querySelector('.header_shuffle_button');
 shuffle_button.addEventListener('click', shuffleSongList);
+
